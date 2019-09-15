@@ -17,7 +17,8 @@ describe("NodeFSInterface", function() {
 
     describe("getDirectoryContents", function() {
         it("returns an array of items", function() {
-            return this.interface.getDirectoryContents({ identifier: targetPath })
+            return this.interface
+                .getDirectoryContents({ identifier: targetPath })
                 .then(contents => {
                     expect(contents).to.be.an("array");
                     expect(contents).to.have.length.above(0);
@@ -26,7 +27,8 @@ describe("NodeFSInterface", function() {
 
         describe("returned items", function() {
             beforeEach(function() {
-                return this.interface.getDirectoryContents({ identifier: targetPath })
+                return this.interface
+                    .getDirectoryContents({ identifier: targetPath })
                     .then(contents => {
                         this.contents = contents;
                     });
@@ -34,7 +36,10 @@ describe("NodeFSInterface", function() {
 
             it("correctly sets name & identifier properties", function() {
                 const fileItem = this.contents.find(item => item.name === "rootfile.txt");
-                expect(fileItem).to.have.property("identifier", joinPath(targetPath, "rootfile.txt"));
+                expect(fileItem).to.have.property(
+                    "identifier",
+                    joinPath(targetPath, "rootfile.txt")
+                );
             });
 
             it("correctly identify directories", function() {
@@ -62,10 +67,9 @@ describe("NodeFSInterface", function() {
     describe("getFileContents", function() {
         it("returns correct file contents", function() {
             const filename = joinPath(targetPath, "rootfile.txt");
-            return this.interface.getFileContents({ identifier: filename })
-                .then(contents => {
-                    expect(contents.trim()).to.equal("root-file-txt");
-                });
+            return this.interface.getFileContents({ identifier: filename }).then(contents => {
+                expect(contents.trim()).to.equal("root-file-txt");
+            });
         });
     });
 

@@ -64,11 +64,7 @@ class NodeFSInterface extends FileSystemInterface {
                 if (err) {
                     return reject(new VError(err, `Failed getting file properties: ${filename}`));
                 }
-                const {
-                    ctime,
-                    mtime,
-                    size
-                } = stat;
+                const { ctime, mtime, size } = stat;
                 const type = stat.isDirectory() ? "directory" : "file";
                 const created = new Date(ctime).toUTCString();
                 const modified = new Date(mtime).toUTCString();
@@ -83,7 +79,7 @@ class NodeFSInterface extends FileSystemInterface {
             });
         });
     }
-};
+}
 
 registerInterface("fs", NodeFSInterface);
 

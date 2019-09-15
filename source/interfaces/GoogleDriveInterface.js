@@ -11,38 +11,36 @@ class GoogleDriveInterface extends FileSystemInterface {
 
     getDirectoryContents(pathIdentifier) {
         const { identifier: parentID = null } = pathIdentifier;
-        return this.googleDriveClient
-            .getDirectoryContents({ tree: false })
-            .then(files => {
-                const selectedFiles = [];
-                if (!parentID) {
-                    // Root dir
-                    const allIDs = files.map(file => file.id);
-                    files.forEach(file => {
-                        file.parents.forEach(parentID => {
-                            if (allIDs.indexOf(parentID) === -1 && rootIDs.indexOf(parentID) === -1) {
-                                selectedFiles.push(file);
-                            }
-                        });
-                    });
-                } else {
-                    // Sub dir
-                    files.forEach(file => {
-                        if (file.parents.indexOf(parentID) >= 0) {
+        return this.googleDriveClient.getDirectoryContents({ tree: false }).then(files => {
+            const selectedFiles = [];
+            if (!parentID) {
+                // Root dir
+                const allIDs = files.map(file => file.id);
+                files.forEach(file => {
+                    file.parents.forEach(parentID => {
+                        if (allIDs.indexOf(parentID) === -1 && rootIDs.indexOf(parentID) === -1) {
                             selectedFiles.push(file);
                         }
                     });
-                }
-                return selectedFiles.map(file => ({
-                    identifier: file.id,
-                    name: file.filename,
-                    type: file.type,
-                    size: file.type === "directory" ? 0 : file.size,
-                    mime: file.mime,
-                    created: new Date(file.createdTime).toUTCString(),
-                    modified: new Date(file.modifiedTime).toUTCString()
-                }));
-            });
+                });
+            } else {
+                // Sub dir
+                files.forEach(file => {
+                    if (file.parents.indexOf(parentID) >= 0) {
+                        selectedFiles.push(file);
+                    }
+                });
+            }
+            return selectedFiles.map(file => ({
+                identifier: file.id,
+                name: file.filename,
+                type: file.type,
+                size: file.type === "directory" ? 0 : file.size,
+                mime: file.mime,
+                created: new Date(file.createdTime).toUTCString(),
+                modified: new Date(file.modifiedTime).toUTCString()
+            }));
+        });
     }
 
     getFileContents(fileIdentifier) {
@@ -66,7 +64,7 @@ class GoogleDriveInterface extends FileSystemInterface {
                 name: fileIdentifier.name
             }));
     }
-};
+}
 
 registerInterface("googledrive", GoogleDriveInterface);
 
