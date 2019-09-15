@@ -14,6 +14,8 @@
 <dd></dd>
 <dt><a href="#FileIdentifier">FileIdentifier</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#DropboxInterfaceConfig">DropboxInterfaceConfig</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#GoogleDriveInterfaceConfig">GoogleDriveInterfaceConfig</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#NodeFSInterfaceConfig">NodeFSInterfaceConfig</a> : <code>Object</code></dt>
@@ -31,6 +33,11 @@
         * [.instantiateInterface(id, config)](#module_FileInterface.instantiateInterface) ⇒ <code>Object</code>
         * [.registerInterface(id, classRef)](#module_FileInterface.registerInterface)
     * _inner_
+        * [~DropboxInterface](#module_FileInterface.DropboxInterface) ⇐ <code>FileSystemInterface</code>
+            * [new DropboxInterface(config)](#new_module_FileInterface.DropboxInterface_new)
+            * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+            * [.getFileContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
+            * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.DropboxInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
         * [~GoogleDriveInterface](#module_FileInterface.GoogleDriveInterface) ⇐ <code>FileSystemInterface</code>
             * [new GoogleDriveInterface(config)](#new_module_FileInterface.GoogleDriveInterface_new)
             * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
@@ -92,6 +99,65 @@ Register an interface reference for an ID
 | --- | --- | --- |
 | id | <code>String</code> | The identifier for the interface |
 | classRef | <code>function</code> | The class reference |
+
+<a name="module_FileInterface.DropboxInterface"></a>
+
+### FileInterface~DropboxInterface ⇐ <code>FileSystemInterface</code>
+Dropbox interface
+
+**Kind**: inner class of [<code>FileInterface</code>](#module_FileInterface)  
+**Extends**: <code>FileSystemInterface</code>  
+
+* [~DropboxInterface](#module_FileInterface.DropboxInterface) ⇐ <code>FileSystemInterface</code>
+    * [new DropboxInterface(config)](#new_module_FileInterface.DropboxInterface_new)
+    * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+    * [.getFileContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
+    * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.DropboxInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
+
+<a name="new_module_FileInterface.DropboxInterface_new"></a>
+
+#### new DropboxInterface(config)
+Constructor for the interface
+
+
+| Param | Type |
+| --- | --- |
+| config | [<code>DropboxInterfaceConfig</code>](#DropboxInterfaceConfig) | 
+
+<a name="module_FileInterface.DropboxInterface+getDirectoryContents"></a>
+
+#### dropboxInterface.getDirectoryContents(pathIdentifier) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+Get remote directory contents
+
+**Kind**: instance method of [<code>DropboxInterface</code>](#module_FileInterface.DropboxInterface)  
+
+| Param | Type |
+| --- | --- |
+| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+
+<a name="module_FileInterface.DropboxInterface+getFileContents"></a>
+
+#### dropboxInterface.getFileContents(pathIdentifier) ⇒ <code>Promise.&lt;String&gt;</code>
+Get remote file contents
+
+**Kind**: instance method of [<code>DropboxInterface</code>](#module_FileInterface.DropboxInterface)  
+
+| Param | Type |
+| --- | --- |
+| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+
+<a name="module_FileInterface.DropboxInterface+putFileContents"></a>
+
+#### dropboxInterface.putFileContents(parentPathIdentifier, fileIdentifier, data) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
+Write remote file contents
+
+**Kind**: instance method of [<code>DropboxInterface</code>](#module_FileInterface.DropboxInterface)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| parentPathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) |  |
+| fileIdentifier | [<code>FileIdentifier</code>](#FileIdentifier) |  |
+| data | <code>String</code> | File data |
 
 <a name="module_FileInterface.GoogleDriveInterface"></a>
 
@@ -272,6 +338,16 @@ Write local file contents
 | --- | --- | --- |
 | identifier | <code>String</code> \| <code>Number</code> \| <code>null</code> | File system file  identifier (usually filename (full) on directory-based systems,  or a file identifier on platforms such as Google Drive) |
 | name | <code>String</code> | File name (short) |
+
+<a name="DropboxInterfaceConfig"></a>
+
+## DropboxInterfaceConfig : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| dropboxClient | <code>Object</code> | Dropbox client  instance |
 
 <a name="GoogleDriveInterfaceConfig"></a>
 
