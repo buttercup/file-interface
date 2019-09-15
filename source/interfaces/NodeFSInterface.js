@@ -3,12 +3,31 @@ const joinPath = require("join-path");
 const FileSystemInterface = require("../FileSystemInterface.js");
 const { registerInterface } = require("../register.js");
 
+/**
+ * @typedef {Object} NodeFSInterfaceConfig
+ * @property {Object} fs - Reference to Node's fs API
+ */
+
+/**
+ * Node's FS interface
+ * @augments FileSystemInterface
+ * @memberof module:FileInterface
+ */
 class NodeFSInterface extends FileSystemInterface {
+    /**
+     * Constructor for the interface
+     * @param {NodeFSInterfaceConfig} config
+     */
     constructor(config) {
         super();
         this.fs = config.fs;
     }
 
+    /**
+     * Get local directory contents
+     * @param {PathIdentifier} pathIdentifier
+     * @returns {Promise.<Array.<FileItem>>}
+     */
     getDirectoryContents(pathIdentifier) {
         const { identifier: dir } = pathIdentifier;
         const fetch = new Promise((resolve, reject) => {
@@ -22,6 +41,11 @@ class NodeFSInterface extends FileSystemInterface {
         return fetch.then(filenames => this._filenamesToStats(dir, filenames));
     }
 
+    /**
+     * Get local file contents
+     * @param {PathIdentifier} pathIdentifier
+     * @returns {Promise.<String>}
+     */
     getFileContents(pathIdentifier) {
         const { identifier: filename } = pathIdentifier;
         return new Promise((resolve, reject) => {
@@ -34,10 +58,20 @@ class NodeFSInterface extends FileSystemInterface {
         });
     }
 
+    /**
+     * @see FileSystemInterface#getSupportedFeatures
+     */
     getSupportedFeatures() {
         return [...super.getSupportedFeatures(), "created", "modified"];
     }
 
+    /**
+     * Write local file contents
+     * @param {PathIdentifier} parentPathIdentifier
+     * @param {FileIdentifier} fileIdentifier
+     * @param {String} data File data
+     * @returns {Promise.<FileIdentifier>}
+     */
     putFileContents(parentPathIdentifier, fileIdentifier, data) {
         const filename = fileIdentifier.identifier;
         return new Promise((resolve, reject) => {
@@ -53,10 +87,16 @@ class NodeFSInterface extends FileSystemInterface {
         });
     }
 
+    /**
+     * @protected
+     */
     _filenamesToStats(dir, filenames) {
         return Promise.all(filenames.map(filename => this._stat(dir, filename)));
     }
 
+    /**
+     * @protected
+     */
     _stat(dir, filename) {
         const fullPath = joinPath(dir, filename);
         return new Promise((resolve, reject) => {

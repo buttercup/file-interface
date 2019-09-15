@@ -28,6 +28,10 @@
  * @property {String} name - File name (short)
  */
 
+/**
+ * Base interface definition
+ * @memberof module:FileInterface
+ */
 module.exports = class FileSystemInterface {
     constructor() {}
 
