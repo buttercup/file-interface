@@ -1,0 +1,30 @@
+{
+  "name": "@buttercup/file-interface",
+  "version": "0.0.0",
+  "description": "Client request library interface and explorer",
+  "main": "source/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buttercup/file-interface.git"
+  },
+  "keywords": [
+    "file",
+    "interface",
+    "explorer",
+    "mapper",
+    "request"
+  ],
+  "author": "Perry Mitchell <perry@perrymitchell.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buttercup/file-interface/issues"
+  },
+  "homepage": "https://github.com/buttercup/file-interface#readme",
+  "dependencies": {
+    "join-path": "^1.1.1",
+    "verror": "^1.10.0"
+  }
+}
