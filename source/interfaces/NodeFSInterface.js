@@ -1,11 +1,12 @@
 const VError = require("verror");
 const joinPath = require("join-path");
 const FileSystemInterface = require("../FileSystemInterface.js");
+const { registerInterface } = require("../register.js");
 
-module.exports = class FSInterface extends FileSystemInterface {
-    constructor(fs) {
+module.exports = class NodeFSInterface extends FileSystemInterface {
+    constructor(config) {
         super();
-        this.fs = fs;
+        this.fs = config.fs;
     }
 
     getDirectoryContents(pathIdentifier) {
@@ -34,7 +35,7 @@ module.exports = class FSInterface extends FileSystemInterface {
     }
 
     getSupportedFeatures() {
-        return ["created", "modified"];
+        return [...super.getSupportedFeatures(), "created", "modified"];
     }
 
     putFileContents(parentPathIdentifier, fileIdentifier, data) {
@@ -80,3 +81,5 @@ module.exports = class FSInterface extends FileSystemInterface {
         });
     }
 };
+
+registerInterface("fs", NodeFSInterface);
