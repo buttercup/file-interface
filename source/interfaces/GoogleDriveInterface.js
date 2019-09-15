@@ -3,12 +3,32 @@ const joinPath = require("join-path");
 const FileSystemInterface = require("../FileSystemInterface.js");
 const { registerInterface } = require("../register.js");
 
+/**
+ * @typedef {Object} GoogleDriveInterfaceConfig
+ * @property {Object} googleDriveClient - Google Drive client
+ *  instance
+ */
+
+/**
+ * Google Drive interface
+ * @augments FileSystemInterface
+ * @memberof module:FileInterface
+ */
 class GoogleDriveInterface extends FileSystemInterface {
+    /**
+     * Constructor for the interface
+     * @param {GoogleDriveInterfaceConfig} config
+     */
     constructor(config) {
         super();
         this.googleDriveClient = config.googleDriveClient;
     }
 
+    /**
+     * Get remote directory contents
+     * @param {PathIdentifier} pathIdentifier
+     * @returns {Promise.<Array.<FileItem>>}
+     */
     getDirectoryContents(pathIdentifier) {
         const { identifier: parentID = null } = pathIdentifier;
         return this.googleDriveClient.getDirectoryContents({ tree: false }).then(files => {
@@ -43,14 +63,29 @@ class GoogleDriveInterface extends FileSystemInterface {
         });
     }
 
+    /**
+     * Get remote file contents
+     * @param {PathIdentifier} pathIdentifier
+     * @returns {Promise.<String>}
+     */
     getFileContents(fileIdentifier) {
         return this.googleDriveClient.getFileContents(fileIdentifier.identifier);
     }
 
+    /**
+     * @see FileSystemInterface#getSupportedFeatures
+     */
     getSupportedFeatures() {
         return [...super.getSupportedFeatures(), "created", "mime", "modified"];
     }
 
+    /**
+     * Write remote file contents
+     * @param {PathIdentifier} parentPathIdentifier
+     * @param {FileIdentifier} fileIdentifier
+     * @param {String} data File data
+     * @returns {Promise.<FileIdentifier>}
+     */
     putFileContents(parentPathIdentifier, fileIdentifier, data) {
         return this.googleDriveClient
             .putFileContents({

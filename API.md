@@ -14,6 +14,8 @@
 <dd></dd>
 <dt><a href="#FileIdentifier">FileIdentifier</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#GoogleDriveInterfaceConfig">GoogleDriveInterfaceConfig</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#NodeFSInterfaceConfig">NodeFSInterfaceConfig</a> : <code>Object</code></dt>
 <dd></dd>
 </dl>
@@ -29,6 +31,12 @@
         * [.instantiateInterface(id, config)](#module_FileInterface.instantiateInterface) ⇒ <code>Object</code>
         * [.registerInterface(id, classRef)](#module_FileInterface.registerInterface)
     * _inner_
+        * [~GoogleDriveInterface](#module_FileInterface.GoogleDriveInterface) ⇐ <code>FileSystemInterface</code>
+            * [new GoogleDriveInterface(config)](#new_module_FileInterface.GoogleDriveInterface_new)
+            * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+            * [.getFileContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
+            * [.getSupportedFeatures()](#module_FileInterface.GoogleDriveInterface+getSupportedFeatures)
+            * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.GoogleDriveInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
         * [~NodeFSInterface](#module_FileInterface.NodeFSInterface) ⇐ <code>FileSystemInterface</code>
             * [new NodeFSInterface(config)](#new_module_FileInterface.NodeFSInterface_new)
             * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.NodeFSInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
@@ -84,6 +92,71 @@ Register an interface reference for an ID
 | --- | --- | --- |
 | id | <code>String</code> | The identifier for the interface |
 | classRef | <code>function</code> | The class reference |
+
+<a name="module_FileInterface.GoogleDriveInterface"></a>
+
+### FileInterface~GoogleDriveInterface ⇐ <code>FileSystemInterface</code>
+Google Drive interface
+
+**Kind**: inner class of [<code>FileInterface</code>](#module_FileInterface)  
+**Extends**: <code>FileSystemInterface</code>  
+
+* [~GoogleDriveInterface](#module_FileInterface.GoogleDriveInterface) ⇐ <code>FileSystemInterface</code>
+    * [new GoogleDriveInterface(config)](#new_module_FileInterface.GoogleDriveInterface_new)
+    * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+    * [.getFileContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
+    * [.getSupportedFeatures()](#module_FileInterface.GoogleDriveInterface+getSupportedFeatures)
+    * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.GoogleDriveInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
+
+<a name="new_module_FileInterface.GoogleDriveInterface_new"></a>
+
+#### new GoogleDriveInterface(config)
+Constructor for the interface
+
+
+| Param | Type |
+| --- | --- |
+| config | [<code>GoogleDriveInterfaceConfig</code>](#GoogleDriveInterfaceConfig) | 
+
+<a name="module_FileInterface.GoogleDriveInterface+getDirectoryContents"></a>
+
+#### googleDriveInterface.getDirectoryContents(pathIdentifier) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+Get remote directory contents
+
+**Kind**: instance method of [<code>GoogleDriveInterface</code>](#module_FileInterface.GoogleDriveInterface)  
+
+| Param | Type |
+| --- | --- |
+| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+
+<a name="module_FileInterface.GoogleDriveInterface+getFileContents"></a>
+
+#### googleDriveInterface.getFileContents(pathIdentifier) ⇒ <code>Promise.&lt;String&gt;</code>
+Get remote file contents
+
+**Kind**: instance method of [<code>GoogleDriveInterface</code>](#module_FileInterface.GoogleDriveInterface)  
+
+| Param | Type |
+| --- | --- |
+| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+
+<a name="module_FileInterface.GoogleDriveInterface+getSupportedFeatures"></a>
+
+#### googleDriveInterface.getSupportedFeatures()
+**Kind**: instance method of [<code>GoogleDriveInterface</code>](#module_FileInterface.GoogleDriveInterface)  
+**See**: FileSystemInterface#getSupportedFeatures  
+<a name="module_FileInterface.GoogleDriveInterface+putFileContents"></a>
+
+#### googleDriveInterface.putFileContents(parentPathIdentifier, fileIdentifier, data) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
+Write remote file contents
+
+**Kind**: instance method of [<code>GoogleDriveInterface</code>](#module_FileInterface.GoogleDriveInterface)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| parentPathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) |  |
+| fileIdentifier | [<code>FileIdentifier</code>](#FileIdentifier) |  |
+| data | <code>String</code> | File data |
 
 <a name="module_FileInterface.NodeFSInterface"></a>
 
@@ -199,6 +272,16 @@ Write local file contents
 | --- | --- | --- |
 | identifier | <code>String</code> \| <code>Number</code> \| <code>null</code> | File system file  identifier (usually filename (full) on directory-based systems,  or a file identifier on platforms such as Google Drive) |
 | name | <code>String</code> | File name (short) |
+
+<a name="GoogleDriveInterfaceConfig"></a>
+
+## GoogleDriveInterfaceConfig : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| googleDriveClient | <code>Object</code> | Google Drive client  instance |
 
 <a name="NodeFSInterfaceConfig"></a>
 
