@@ -3,7 +3,7 @@ const joinPath = require("join-path");
 const FileSystemInterface = require("../FileSystemInterface.js");
 const { registerInterface } = require("../register.js");
 
-module.exports = class NodeFSInterface extends FileSystemInterface {
+class NodeFSInterface extends FileSystemInterface {
     constructor(config) {
         super();
         this.fs = config.fs;
@@ -39,13 +39,16 @@ module.exports = class NodeFSInterface extends FileSystemInterface {
     }
 
     putFileContents(parentPathIdentifier, fileIdentifier, data) {
-        const filename = joinPath(parentPathIdentifier.identifier, fileIdentifier.identifier);
+        const filename = fileIdentifier.identifier;
         return new Promise((resolve, reject) => {
             this.fs.writeFile(filename, data, err => {
                 if (err) {
                     return reject(new VError(err, `Error writing file: ${filename}`));
                 }
-                resolve(fileIdentifier);
+                resolve({
+                    identifier: filename,
+                    name: fileIdentifier.name
+                });
             });
         });
     }
@@ -73,7 +76,7 @@ module.exports = class NodeFSInterface extends FileSystemInterface {
                     identifier: fullPath,
                     name: filename,
                     type,
-                    size,
+                    size: stat.isDirectory() ? 0 : size,
                     created,
                     modified
                 });
@@ -83,3 +86,5 @@ module.exports = class NodeFSInterface extends FileSystemInterface {
 };
 
 registerInterface("fs", NodeFSInterface);
+
+module.exports = NodeFSInterface;
