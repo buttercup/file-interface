@@ -20,6 +20,8 @@
 <dd></dd>
 <dt><a href="#NodeFSInterfaceConfig">NodeFSInterfaceConfig</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#WebDAVInterfaceConfig">WebDAVInterfaceConfig</a> : <code>Object</code></dt>
+<dd></dd>
 </dl>
 
 <a name="module_FileInterface"></a>
@@ -52,6 +54,12 @@
             * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.NodeFSInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
             * [._filenamesToStats()](#module_FileInterface.NodeFSInterface+_filenamesToStats)
             * [._stat()](#module_FileInterface.NodeFSInterface+_stat)
+        * [~WebDAVInterface](#module_FileInterface.WebDAVInterface) ⇐ <code>FileSystemInterface</code>
+            * [new WebDAVInterface(config)](#new_module_FileInterface.WebDAVInterface_new)
+            * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+            * [.getFileContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
+            * [.getSupportedFeatures()](#module_FileInterface.WebDAVInterface+getSupportedFeatures)
+            * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.WebDAVInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
 
 <a name="module_FileInterface.module.exports"></a>
 
@@ -301,6 +309,71 @@ Write local file contents
 #### nodeFSInterface.\_stat()
 **Kind**: instance method of [<code>NodeFSInterface</code>](#module_FileInterface.NodeFSInterface)  
 **Access**: protected  
+<a name="module_FileInterface.WebDAVInterface"></a>
+
+### FileInterface~WebDAVInterface ⇐ <code>FileSystemInterface</code>
+WebDAV interface
+
+**Kind**: inner class of [<code>FileInterface</code>](#module_FileInterface)  
+**Extends**: <code>FileSystemInterface</code>  
+
+* [~WebDAVInterface](#module_FileInterface.WebDAVInterface) ⇐ <code>FileSystemInterface</code>
+    * [new WebDAVInterface(config)](#new_module_FileInterface.WebDAVInterface_new)
+    * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+    * [.getFileContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
+    * [.getSupportedFeatures()](#module_FileInterface.WebDAVInterface+getSupportedFeatures)
+    * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.WebDAVInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
+
+<a name="new_module_FileInterface.WebDAVInterface_new"></a>
+
+#### new WebDAVInterface(config)
+Constructor for the interface
+
+
+| Param | Type |
+| --- | --- |
+| config | [<code>WebDAVInterfaceConfig</code>](#WebDAVInterfaceConfig) | 
+
+<a name="module_FileInterface.WebDAVInterface+getDirectoryContents"></a>
+
+#### webDAVInterface.getDirectoryContents(pathIdentifier) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+Get remote directory contents
+
+**Kind**: instance method of [<code>WebDAVInterface</code>](#module_FileInterface.WebDAVInterface)  
+
+| Param | Type |
+| --- | --- |
+| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+
+<a name="module_FileInterface.WebDAVInterface+getFileContents"></a>
+
+#### webDAVInterface.getFileContents(pathIdentifier) ⇒ <code>Promise.&lt;String&gt;</code>
+Get remote file contents
+
+**Kind**: instance method of [<code>WebDAVInterface</code>](#module_FileInterface.WebDAVInterface)  
+
+| Param | Type |
+| --- | --- |
+| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+
+<a name="module_FileInterface.WebDAVInterface+getSupportedFeatures"></a>
+
+#### webDAVInterface.getSupportedFeatures()
+**Kind**: instance method of [<code>WebDAVInterface</code>](#module_FileInterface.WebDAVInterface)  
+**See**: FileSystemInterface#getSupportedFeatures  
+<a name="module_FileInterface.WebDAVInterface+putFileContents"></a>
+
+#### webDAVInterface.putFileContents(parentPathIdentifier, fileIdentifier, data) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
+Write remote file contents
+
+**Kind**: instance method of [<code>WebDAVInterface</code>](#module_FileInterface.WebDAVInterface)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| parentPathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) |  |
+| fileIdentifier | [<code>FileIdentifier</code>](#FileIdentifier) |  |
+| data | <code>String</code> | File data |
+
 <a name="FileItem"></a>
 
 ## FileItem : <code>Object</code>
@@ -368,4 +441,14 @@ Write local file contents
 | Name | Type | Description |
 | --- | --- | --- |
 | fs | <code>Object</code> | Reference to Node's fs API |
+
+<a name="WebDAVInterfaceConfig"></a>
+
+## WebDAVInterfaceConfig : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| webdavClient | <code>Object</code> | WebDAV client  instance |
 
