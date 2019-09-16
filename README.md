@@ -32,8 +32,8 @@ An interface is created when required, once you have the necessary components fo
 const { instantiateInterface } = require("@buttercup/file-interface");
 const fs = require("fs");
 
-const interface = instantiateInterface("fs", { fs });
-interface.getDirectoryContents({ identifier: "./dirname" }).then(results => {
+const fsInterface = instantiateInterface("fs", { fs });
+fsInterface.getDirectoryContents({ identifier: "./dirname" }).then(results => {
     // Returns something like the following:
     // [{
     //     identifier: "/root/dirname/testfile.txt",
@@ -53,9 +53,9 @@ const { instantiateInterface } = require("@buttercup/file-interface");
 const { createClient } = require("@buttercup/googledrive-client");
 
 const googleDriveClient = createClient(myToken);
-const interface = instantiateInterface("googledrive", { googleDriveClient });
+const fsInterface = instantiateInterface("googledrive", { googleDriveClient });
 
-interface.getDirectoryContents({ identifier: "<dir-id>" }).then(results => {
+fsInterface.getDirectoryContents({ identifier: "<dir-id>" }).then(results => {
     // Returns something like the following:
     // [{
     //     identifier: "0BxOS7mTBMR_bMHZRUjJ5NU1ZOWs",
@@ -68,14 +68,14 @@ interface.getDirectoryContents({ identifier: "<dir-id>" }).then(results => {
 });
 
 // Update existing file
-interface.putFileContents(
+fsInterface.putFileContents(
     { identifier: "<dir-id>" },
     { identifier: "0BxOS7mTBMR_bMHZRUjJ5NU1ZOWs", name: "testfile.txt" },
     "some data"
 );
 
 // Write new file
-interface.putFileContents(
+fsInterface.putFileContents(
     { identifier: "<dir-id>" },
     { identifier: null, name: "newfile.txt" },
     "some data"
