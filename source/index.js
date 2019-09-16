@@ -3,6 +3,7 @@ const { getInterfaceReference, instantiateInterface, registerInterface } = requi
 const NodeFSInterface = require("./interfaces/NodeFSInterface.js");
 const GoogleDriveInterface = require("./interfaces/GoogleDriveInterface.js");
 const DropboxInterface = require("./interfaces/DropboxInterface.js");
+const WebDAVInterface = require("./interfaces/WebDAVInterface.js");
 
 /**
  * @module FileInterface
@@ -13,6 +14,7 @@ module.exports = {
     FileSystemInterface,
     GoogleDriveInterface,
     NodeFSInterface,
+    WebDAVInterface,
     getInterfaceReference,
     instantiateInterface,
     registerInterface
