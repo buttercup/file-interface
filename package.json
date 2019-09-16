@@ -1,6 +1,6 @@
 {
   "name": "@buttercup/file-interface",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Client request library interface and explorer",
   "main": "source/index.js",
   "scripts": {
