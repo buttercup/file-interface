@@ -87,3 +87,18 @@ interface.putFileContents(
 ```
 
 Make sure to refer to the [API documentation](API.md) for more information.
+
+### Supported fields
+
+When calling `getDirectoryContents`, some base fields are always available:
+
+ * `identifier`: The identifying path or ID of the file/directory
+ * `filename`: The base filename of the file/directory
+ * `type`: Either "file" or "directory"
+ * `size`: The size, in bytes, of the item (always `0` for directories)
+
+Other additional fields are sometimes returned, based upon what the remote system supports. These can be detected by calling the `getSupportedFeatures` method on the interface instance. It returns an array of strings that indicate what is specified on each returned file item:
+
+ * `created` indicates that a field called `created` is present on every file item, which is the creation date of the file.
+ * `modified` indicates that a field called `modified` is present on every file item, which is the modification date of the file.
+ * `mime` indicates that a field called `mime` is present on each file item, containing the MIME type of the item.
