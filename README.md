@@ -1,6 +1,8 @@
 # File Interface
 > Client request library interface and explorer
 
+[![Build Status](https://travis-ci.org/buttercup/file-interface.svg?branch=master)](https://travis-ci.org/buttercup/file-interface)
+
 ## About
 
 Reading, writing and exploring file systems within Buttercup has typically been a complex process with differing approaches on the different application platforms. This library is intended to provide a common API with which to build the following tools:
