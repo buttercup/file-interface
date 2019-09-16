@@ -24,6 +24,10 @@ None of these packages are included in this repository and are expected to be pr
 
 Install by running: `npm install @buttercup/file-interface --save`
 
+### Environment support
+
+This library supports NodeJS version 8 and above. It is not transpiled and uses commonjs2 style modules.
+
 ## Usage
 
 An interface is created when required, once you have the necessary components for the interface to function:
