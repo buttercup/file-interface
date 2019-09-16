@@ -1,7 +1,7 @@
 # File Interface
 > Client request library interface and explorer
 
-[![Build Status](https://travis-ci.org/buttercup/file-interface.svg?branch=master)](https://travis-ci.org/buttercup/file-interface)
+[![Build Status](https://travis-ci.org/buttercup/file-interface.svg?branch=master)](https://travis-ci.org/buttercup/file-interface) [![npm version](https://badge.fury.io/js/%40buttercup%2Ffile-interface.svg)](https://www.npmjs.com/package/@buttercup/file-interface)
 
 ## About
 
