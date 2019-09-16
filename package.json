@@ -25,6 +25,9 @@
     "type": "git",
     "url": "git+https://github.com/buttercup/file-interface.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "file",
     "interface",
