@@ -29,8 +29,8 @@ class GoogleDriveInterface extends FileSystemInterface {
      * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}
      */
-    getDirectoryContents(pathIdentifier = {}) {
-        const { identifier: parentID = null } = pathIdentifier;
+    getDirectoryContents(pathIdentifier) {
+        const { identifier: parentID = null } = pathIdentifier || {};
         return this.googleDriveClient.getDirectoryContents({ tree: false }).then(files => {
             const selectedFiles = [];
             if (!parentID) {
@@ -58,7 +58,8 @@ class GoogleDriveInterface extends FileSystemInterface {
                 size: file.type === "directory" ? 0 : file.size,
                 mime: file.mime,
                 created: new Date(file.created).toUTCString(),
-                modified: new Date(file.modified).toUTCString()
+                modified: new Date(file.modified).toUTCString(),
+                parent: pathIdentifier
             }));
         });
     }

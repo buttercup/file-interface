@@ -28,8 +28,8 @@ class NodeFSInterface extends FileSystemInterface {
      * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}
      */
-    getDirectoryContents(pathIdentifier = {}) {
-        const { identifier: dir = "/" } = pathIdentifier;
+    getDirectoryContents(pathIdentifier) {
+        const { identifier: dir = "/" } = pathIdentifier || {};
         const fetch = new Promise((resolve, reject) => {
             this.fs.readdir(dir, (err, filenames) => {
                 if (err) {
@@ -38,7 +38,15 @@ class NodeFSInterface extends FileSystemInterface {
                 resolve(filenames);
             });
         });
-        return fetch.then(filenames => this._filenamesToStats(dir, filenames));
+        return fetch.then(filenames =>
+            this._filenamesToStats(dir, filenames).then(items =>
+                items.map(item =>
+                    Object.assign(item, {
+                        parent: pathIdentifier
+                    })
+                )
+            )
+        );
     }
 
     /**

@@ -36,7 +36,8 @@ class DropboxInterface extends FileSystemInterface {
                 identifier: item.path,
                 name: item.name,
                 type: item.type,
-                size: item.type === "directory" ? 0 : item.size
+                size: item.type === "directory" ? 0 : item.size,
+                parent: pathIdentifier
             }))
         );
     }

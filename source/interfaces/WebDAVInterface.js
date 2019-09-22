@@ -37,7 +37,8 @@ class WebDAVInterface extends FileSystemInterface {
                 name: item.basename,
                 type: item.type,
                 size: item.type === "directory" ? 0 : item.size,
-                modified: new Date(item.lastmod).toUTCString()
+                modified: new Date(item.lastmod).toUTCString(),
+                parent: pathIdentifier
             }))
         );
     }

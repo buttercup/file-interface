@@ -10,6 +10,8 @@
  *  whenthe item was created
  * @property {String=} modified - UTC date string that represents
  *  when the item was last modified
+ * @property {PathIdentifier=} parent - Parent identifier object,
+ *  when available. If not set assume currently in root.
  */
 
 /**
