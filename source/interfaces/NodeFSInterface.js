@@ -73,7 +73,9 @@ class NodeFSInterface extends FileSystemInterface {
      * @returns {Promise.<FileIdentifier>}
      */
     putFileContents(parentPathIdentifier, fileIdentifier, data) {
-        const filename = fileIdentifier.identifier;
+        const filename = fileIdentifier.identifier
+            ? fileIdentifier.identifier
+            : joinPath(parentPathIdentifier.identifier, fileIdentifier.name);
         return new Promise((resolve, reject) => {
             this.fs.writeFile(filename, data, err => {
                 if (err) {

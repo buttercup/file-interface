@@ -58,6 +58,9 @@ class DropboxInterface extends FileSystemInterface {
      * @returns {Promise.<FileIdentifier>}
      */
     putFileContents(parentPathIdentifier, fileIdentifier, data) {
+        const writePath = fileIdentifier.identifier
+            ? fileIdentifier.identifier
+            : joinPath(parentPathIdentifier.identifier, fileIdentifier.name);
         return this.dropboxClient
             .putFileContents(fileIdentifier.identifier, data)
             .then(() => fileIdentifier);

@@ -70,8 +70,8 @@ module.exports = class FileSystemInterface {
      * @param {PathIdentifier} parentPathIdentifier The parent path
      *  identifer that contains/will-contain the file
      * @param {FileIdentifier} fileIdentifier The file identifier
-     *  for the storage. `identifier` may be null on systems that
-     *  support it, to indicate a new file.
+     *  for the storage. `identifier` may be null to indicate a new
+     *  file.
      * @param {String} data The data to write
      * @returns {Promise.<FileIdentifier>} Always returns a file identifier,
      *  which is useful when systems require `null` to indicate

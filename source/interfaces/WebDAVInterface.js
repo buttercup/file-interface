@@ -66,6 +66,9 @@ class WebDAVInterface extends FileSystemInterface {
      * @returns {Promise.<FileIdentifier>}
      */
     putFileContents(parentPathIdentifier, fileIdentifier, data) {
+        const filename = fileIdentifier.identifier
+            ? fileIdentifier.identifier
+            : joinPath(parentPathIdentifier.identifier, fileIdentifier.name);
         return this.webdavClient
             .putFileContents(fileIdentifier.identifier, data)
             .then(() => fileIdentifier);
