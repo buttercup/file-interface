@@ -389,6 +389,7 @@ Write remote file contents
 | [mime] | <code>String</code> | MIME type of the item |
 | [created] | <code>String</code> | UTC date string that represents  whenthe item was created |
 | [modified] | <code>String</code> | UTC date string that represents  when the item was last modified |
+| [parent] | [<code>PathIdentifier</code>](#PathIdentifier) | Parent identifier object,  when available. If not set assume currently in root. |
 
 <a name="PathIdentifier"></a>
 
