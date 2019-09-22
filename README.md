@@ -20,6 +20,15 @@ The API provided by this library is common across all data providers:
 
 None of these packages are included in this repository and are expected to be provided at runtime.
 
+To create each of the interfaces, run the following:
+
+```javascript
+const fsInterface = instantiateInterface("fs", { fs });
+const googleDriveInterface = instantiateInterface("googledrive", { googleDriveClient });
+const dropboxInterface = instantiateInterface("dropbox", { dropboxClient });
+const webdavInterface = instantiateInterface("webdav", { webdavClient });
+```
+
 ### Installation
 
 Install by running: `npm install @buttercup/file-interface --save`
