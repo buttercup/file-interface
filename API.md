@@ -37,17 +37,20 @@
     * _inner_
         * [~DropboxInterface](#module_FileInterface.DropboxInterface) ⇐ <code>FileSystemInterface</code>
             * [new DropboxInterface(config)](#new_module_FileInterface.DropboxInterface_new)
+            * [.deleteFile(fileIdentifier)](#module_FileInterface.DropboxInterface+deleteFile) ⇒ <code>Promise</code>
             * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.DropboxInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
         * [~GoogleDriveInterface](#module_FileInterface.GoogleDriveInterface) ⇐ <code>FileSystemInterface</code>
             * [new GoogleDriveInterface(config)](#new_module_FileInterface.GoogleDriveInterface_new)
+            * [.deleteFile(fileIdentifier)](#module_FileInterface.GoogleDriveInterface+deleteFile) ⇒ <code>Promise</code>
             * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.getSupportedFeatures()](#module_FileInterface.GoogleDriveInterface+getSupportedFeatures)
             * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.GoogleDriveInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
         * [~NodeFSInterface](#module_FileInterface.NodeFSInterface) ⇐ <code>FileSystemInterface</code>
             * [new NodeFSInterface(config)](#new_module_FileInterface.NodeFSInterface_new)
+            * [.deleteFile(fileIdentifier)](#module_FileInterface.NodeFSInterface+deleteFile) ⇒ <code>Promise</code>
             * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.NodeFSInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.NodeFSInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.getSupportedFeatures()](#module_FileInterface.NodeFSInterface+getSupportedFeatures)
@@ -56,6 +59,7 @@
             * [._stat()](#module_FileInterface.NodeFSInterface+_stat)
         * [~WebDAVInterface](#module_FileInterface.WebDAVInterface) ⇐ <code>FileSystemInterface</code>
             * [new WebDAVInterface(config)](#new_module_FileInterface.WebDAVInterface_new)
+            * [.deleteFile(fileIdentifier)](#module_FileInterface.WebDAVInterface+deleteFile) ⇒ <code>Promise</code>
             * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.getSupportedFeatures()](#module_FileInterface.WebDAVInterface+getSupportedFeatures)
@@ -118,6 +122,7 @@ Dropbox interface
 
 * [~DropboxInterface](#module_FileInterface.DropboxInterface) ⇐ <code>FileSystemInterface</code>
     * [new DropboxInterface(config)](#new_module_FileInterface.DropboxInterface_new)
+    * [.deleteFile(fileIdentifier)](#module_FileInterface.DropboxInterface+deleteFile) ⇒ <code>Promise</code>
     * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.DropboxInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
@@ -131,6 +136,17 @@ Constructor for the interface
 | Param | Type |
 | --- | --- |
 | config | [<code>DropboxInterfaceConfig</code>](#DropboxInterfaceConfig) | 
+
+<a name="module_FileInterface.DropboxInterface+deleteFile"></a>
+
+#### dropboxInterface.deleteFile(fileIdentifier) ⇒ <code>Promise</code>
+Delete a remote file
+
+**Kind**: instance method of [<code>DropboxInterface</code>](#module_FileInterface.DropboxInterface)  
+
+| Param | Type |
+| --- | --- |
+| fileIdentifier | [<code>FileIdentifier</code>](#FileIdentifier) | 
 
 <a name="module_FileInterface.DropboxInterface+getDirectoryContents"></a>
 
@@ -177,6 +193,7 @@ Google Drive interface
 
 * [~GoogleDriveInterface](#module_FileInterface.GoogleDriveInterface) ⇐ <code>FileSystemInterface</code>
     * [new GoogleDriveInterface(config)](#new_module_FileInterface.GoogleDriveInterface_new)
+    * [.deleteFile(fileIdentifier)](#module_FileInterface.GoogleDriveInterface+deleteFile) ⇒ <code>Promise</code>
     * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.getSupportedFeatures()](#module_FileInterface.GoogleDriveInterface+getSupportedFeatures)
@@ -191,6 +208,17 @@ Constructor for the interface
 | Param | Type |
 | --- | --- |
 | config | [<code>GoogleDriveInterfaceConfig</code>](#GoogleDriveInterfaceConfig) | 
+
+<a name="module_FileInterface.GoogleDriveInterface+deleteFile"></a>
+
+#### googleDriveInterface.deleteFile(fileIdentifier) ⇒ <code>Promise</code>
+Delete a remote file
+
+**Kind**: instance method of [<code>GoogleDriveInterface</code>](#module_FileInterface.GoogleDriveInterface)  
+
+| Param | Type |
+| --- | --- |
+| fileIdentifier | [<code>FileIdentifier</code>](#FileIdentifier) | 
 
 <a name="module_FileInterface.GoogleDriveInterface+getDirectoryContents"></a>
 
@@ -242,6 +270,7 @@ Node's FS interface
 
 * [~NodeFSInterface](#module_FileInterface.NodeFSInterface) ⇐ <code>FileSystemInterface</code>
     * [new NodeFSInterface(config)](#new_module_FileInterface.NodeFSInterface_new)
+    * [.deleteFile(fileIdentifier)](#module_FileInterface.NodeFSInterface+deleteFile) ⇒ <code>Promise</code>
     * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.NodeFSInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.NodeFSInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.getSupportedFeatures()](#module_FileInterface.NodeFSInterface+getSupportedFeatures)
@@ -258,6 +287,17 @@ Constructor for the interface
 | Param | Type |
 | --- | --- |
 | config | [<code>NodeFSInterfaceConfig</code>](#NodeFSInterfaceConfig) | 
+
+<a name="module_FileInterface.NodeFSInterface+deleteFile"></a>
+
+#### nodeFSInterface.deleteFile(fileIdentifier) ⇒ <code>Promise</code>
+Delete a local file
+
+**Kind**: instance method of [<code>NodeFSInterface</code>](#module_FileInterface.NodeFSInterface)  
+
+| Param | Type |
+| --- | --- |
+| fileIdentifier | [<code>FileIdentifier</code>](#FileIdentifier) | 
 
 <a name="module_FileInterface.NodeFSInterface+getDirectoryContents"></a>
 
@@ -319,6 +359,7 @@ WebDAV interface
 
 * [~WebDAVInterface](#module_FileInterface.WebDAVInterface) ⇐ <code>FileSystemInterface</code>
     * [new WebDAVInterface(config)](#new_module_FileInterface.WebDAVInterface_new)
+    * [.deleteFile(fileIdentifier)](#module_FileInterface.WebDAVInterface+deleteFile) ⇒ <code>Promise</code>
     * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.getSupportedFeatures()](#module_FileInterface.WebDAVInterface+getSupportedFeatures)
@@ -333,6 +374,17 @@ Constructor for the interface
 | Param | Type |
 | --- | --- |
 | config | [<code>WebDAVInterfaceConfig</code>](#WebDAVInterfaceConfig) | 
+
+<a name="module_FileInterface.WebDAVInterface+deleteFile"></a>
+
+#### webDAVInterface.deleteFile(fileIdentifier) ⇒ <code>Promise</code>
+Delete a remote file
+
+**Kind**: instance method of [<code>WebDAVInterface</code>](#module_FileInterface.WebDAVInterface)  
+
+| Param | Type |
+| --- | --- |
+| fileIdentifier | [<code>FileIdentifier</code>](#FileIdentifier) | 
 
 <a name="module_FileInterface.WebDAVInterface+getDirectoryContents"></a>
 

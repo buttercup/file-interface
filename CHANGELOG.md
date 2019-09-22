@@ -1,5 +1,10 @@
 # File Interface changelog
 
+## v0.3.0
+_2019-02-22_
+
+ * `deleteFile` method
+
 ## v0.2.0
 _2019-09-22_
 
