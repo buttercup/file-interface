@@ -37,18 +37,18 @@
     * _inner_
         * [~DropboxInterface](#module_FileInterface.DropboxInterface) ⇐ <code>FileSystemInterface</code>
             * [new DropboxInterface(config)](#new_module_FileInterface.DropboxInterface_new)
-            * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+            * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.DropboxInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
         * [~GoogleDriveInterface](#module_FileInterface.GoogleDriveInterface) ⇐ <code>FileSystemInterface</code>
             * [new GoogleDriveInterface(config)](#new_module_FileInterface.GoogleDriveInterface_new)
-            * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+            * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.getSupportedFeatures()](#module_FileInterface.GoogleDriveInterface+getSupportedFeatures)
             * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.GoogleDriveInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
         * [~NodeFSInterface](#module_FileInterface.NodeFSInterface) ⇐ <code>FileSystemInterface</code>
             * [new NodeFSInterface(config)](#new_module_FileInterface.NodeFSInterface_new)
-            * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.NodeFSInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+            * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.NodeFSInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.NodeFSInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.getSupportedFeatures()](#module_FileInterface.NodeFSInterface+getSupportedFeatures)
             * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.NodeFSInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
@@ -56,7 +56,7 @@
             * [._stat()](#module_FileInterface.NodeFSInterface+_stat)
         * [~WebDAVInterface](#module_FileInterface.WebDAVInterface) ⇐ <code>FileSystemInterface</code>
             * [new WebDAVInterface(config)](#new_module_FileInterface.WebDAVInterface_new)
-            * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+            * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
             * [.getFileContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
             * [.getSupportedFeatures()](#module_FileInterface.WebDAVInterface+getSupportedFeatures)
             * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.WebDAVInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
@@ -118,7 +118,7 @@ Dropbox interface
 
 * [~DropboxInterface](#module_FileInterface.DropboxInterface) ⇐ <code>FileSystemInterface</code>
     * [new DropboxInterface(config)](#new_module_FileInterface.DropboxInterface_new)
-    * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+    * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.DropboxInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.DropboxInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.DropboxInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
 
@@ -134,14 +134,14 @@ Constructor for the interface
 
 <a name="module_FileInterface.DropboxInterface+getDirectoryContents"></a>
 
-#### dropboxInterface.getDirectoryContents(pathIdentifier) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+#### dropboxInterface.getDirectoryContents([pathIdentifier]) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
 Get remote directory contents
 
 **Kind**: instance method of [<code>DropboxInterface</code>](#module_FileInterface.DropboxInterface)  
 
 | Param | Type |
 | --- | --- |
-| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+| [pathIdentifier] | [<code>PathIdentifier</code>](#PathIdentifier) | 
 
 <a name="module_FileInterface.DropboxInterface+getFileContents"></a>
 
@@ -177,7 +177,7 @@ Google Drive interface
 
 * [~GoogleDriveInterface](#module_FileInterface.GoogleDriveInterface) ⇐ <code>FileSystemInterface</code>
     * [new GoogleDriveInterface(config)](#new_module_FileInterface.GoogleDriveInterface_new)
-    * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+    * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.GoogleDriveInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.GoogleDriveInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.getSupportedFeatures()](#module_FileInterface.GoogleDriveInterface+getSupportedFeatures)
     * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.GoogleDriveInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
@@ -194,14 +194,14 @@ Constructor for the interface
 
 <a name="module_FileInterface.GoogleDriveInterface+getDirectoryContents"></a>
 
-#### googleDriveInterface.getDirectoryContents(pathIdentifier) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+#### googleDriveInterface.getDirectoryContents([pathIdentifier]) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
 Get remote directory contents
 
 **Kind**: instance method of [<code>GoogleDriveInterface</code>](#module_FileInterface.GoogleDriveInterface)  
 
 | Param | Type |
 | --- | --- |
-| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+| [pathIdentifier] | [<code>PathIdentifier</code>](#PathIdentifier) | 
 
 <a name="module_FileInterface.GoogleDriveInterface+getFileContents"></a>
 
@@ -242,7 +242,7 @@ Node's FS interface
 
 * [~NodeFSInterface](#module_FileInterface.NodeFSInterface) ⇐ <code>FileSystemInterface</code>
     * [new NodeFSInterface(config)](#new_module_FileInterface.NodeFSInterface_new)
-    * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.NodeFSInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+    * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.NodeFSInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.NodeFSInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.getSupportedFeatures()](#module_FileInterface.NodeFSInterface+getSupportedFeatures)
     * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.NodeFSInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
@@ -261,14 +261,14 @@ Constructor for the interface
 
 <a name="module_FileInterface.NodeFSInterface+getDirectoryContents"></a>
 
-#### nodeFSInterface.getDirectoryContents(pathIdentifier) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+#### nodeFSInterface.getDirectoryContents([pathIdentifier]) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
 Get local directory contents
 
 **Kind**: instance method of [<code>NodeFSInterface</code>](#module_FileInterface.NodeFSInterface)  
 
 | Param | Type |
 | --- | --- |
-| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+| [pathIdentifier] | [<code>PathIdentifier</code>](#PathIdentifier) | 
 
 <a name="module_FileInterface.NodeFSInterface+getFileContents"></a>
 
@@ -319,7 +319,7 @@ WebDAV interface
 
 * [~WebDAVInterface](#module_FileInterface.WebDAVInterface) ⇐ <code>FileSystemInterface</code>
     * [new WebDAVInterface(config)](#new_module_FileInterface.WebDAVInterface_new)
-    * [.getDirectoryContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+    * [.getDirectoryContents([pathIdentifier])](#module_FileInterface.WebDAVInterface+getDirectoryContents) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
     * [.getFileContents(pathIdentifier)](#module_FileInterface.WebDAVInterface+getFileContents) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.getSupportedFeatures()](#module_FileInterface.WebDAVInterface+getSupportedFeatures)
     * [.putFileContents(parentPathIdentifier, fileIdentifier, data)](#module_FileInterface.WebDAVInterface+putFileContents) ⇒ [<code>Promise.&lt;FileIdentifier&gt;</code>](#FileIdentifier)
@@ -336,14 +336,14 @@ Constructor for the interface
 
 <a name="module_FileInterface.WebDAVInterface+getDirectoryContents"></a>
 
-#### webDAVInterface.getDirectoryContents(pathIdentifier) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
+#### webDAVInterface.getDirectoryContents([pathIdentifier]) ⇒ <code>Promise.&lt;Array.&lt;FileItem&gt;&gt;</code>
 Get remote directory contents
 
 **Kind**: instance method of [<code>WebDAVInterface</code>](#module_FileInterface.WebDAVInterface)  
 
 | Param | Type |
 | --- | --- |
-| pathIdentifier | [<code>PathIdentifier</code>](#PathIdentifier) | 
+| [pathIdentifier] | [<code>PathIdentifier</code>](#PathIdentifier) | 
 
 <a name="module_FileInterface.WebDAVInterface+getFileContents"></a>
 
