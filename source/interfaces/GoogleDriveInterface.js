@@ -57,8 +57,8 @@ class GoogleDriveInterface extends FileSystemInterface {
                 type: file.type,
                 size: file.type === "directory" ? 0 : file.size,
                 mime: file.mime,
-                created: new Date(file.createdTime).toUTCString(),
-                modified: new Date(file.modifiedTime).toUTCString()
+                created: new Date(file.created).toUTCString(),
+                modified: new Date(file.modified).toUTCString()
             }));
         });
     }
