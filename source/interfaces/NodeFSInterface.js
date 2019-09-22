@@ -24,6 +24,24 @@ class NodeFSInterface extends FileSystemInterface {
     }
 
     /**
+     * Delete a local file
+     * @param {FileIdentifier} fileIdentifier
+     * @returns {Promise}
+     */
+    deleteFile(fileIdentifier) {
+        return new Promise((resolve, reject) => {
+            this.fs.unlink(fileIdentifier.identifier, err => {
+                if (err) {
+                    return reject(
+                        new VError(err, `Failed to delete file: ${fileIdentifier.identifier}`)
+                    );
+                }
+                resolve();
+            });
+        });
+    }
+
+    /**
      * Get local directory contents
      * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}

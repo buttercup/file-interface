@@ -38,6 +38,16 @@ module.exports = class FileSystemInterface {
     constructor() {}
 
     /**
+     * Delete a file
+     * @param {FileIdentifier} fileIdentifier The file identifier for
+     *  deletion
+     * @returns {Promise}
+     */
+    async deleteFile(fileIdentifier) {
+        throw new Error("Not implemented");
+    }
+
+    /**
      * Get the contents of a directory
      * @param {PathIdentifier=} pathIdentifier The identifier of the
      *  path to get the contents of. Pass nothing to get root contents

@@ -25,6 +25,15 @@ class DropboxInterface extends FileSystemInterface {
     }
 
     /**
+     * Delete a remote file
+     * @param {FileIdentifier} fileIdentifier
+     * @returns {Promise}
+     */
+    deleteFile(fileIdentifier) {
+        return this.dropboxClient.deleteFile(fileIdentifier.identifier);
+    }
+
+    /**
      * Get remote directory contents
      * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}
