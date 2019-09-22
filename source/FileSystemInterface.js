@@ -37,8 +37,8 @@ module.exports = class FileSystemInterface {
 
     /**
      * Get the contents of a directory
-     * @param {PathIdentifier} pathIdentifier The identifier of the
-     *  path to get the contents of
+     * @param {PathIdentifier=} pathIdentifier The identifier of the
+     *  path to get the contents of. Pass nothing to get root contents
      * @returns {Promise.<Array.<FileItem>>} An array of file items
      *  that represent remote files and directories
      */

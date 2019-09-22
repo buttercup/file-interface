@@ -25,11 +25,11 @@ class NodeFSInterface extends FileSystemInterface {
 
     /**
      * Get local directory contents
-     * @param {PathIdentifier} pathIdentifier
+     * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}
      */
-    getDirectoryContents(pathIdentifier) {
-        const { identifier: dir } = pathIdentifier;
+    getDirectoryContents(pathIdentifier = {}) {
+        const { identifier: dir = "/" } = pathIdentifier;
         const fetch = new Promise((resolve, reject) => {
             this.fs.readdir(dir, (err, filenames) => {
                 if (err) {

@@ -26,10 +26,10 @@ class GoogleDriveInterface extends FileSystemInterface {
 
     /**
      * Get remote directory contents
-     * @param {PathIdentifier} pathIdentifier
+     * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}
      */
-    getDirectoryContents(pathIdentifier) {
+    getDirectoryContents(pathIdentifier = {}) {
         const { identifier: parentID = null } = pathIdentifier;
         return this.googleDriveClient.getDirectoryContents({ tree: false }).then(files => {
             const selectedFiles = [];
@@ -38,7 +38,7 @@ class GoogleDriveInterface extends FileSystemInterface {
                 const allIDs = files.map(file => file.id);
                 files.forEach(file => {
                     file.parents.forEach(parentID => {
-                        if (allIDs.indexOf(parentID) === -1 && rootIDs.indexOf(parentID) === -1) {
+                        if (allIDs.indexOf(parentID) === -1) {
                             selectedFiles.push(file);
                         }
                     });

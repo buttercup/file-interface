@@ -26,11 +26,12 @@ class DropboxInterface extends FileSystemInterface {
 
     /**
      * Get remote directory contents
-     * @param {PathIdentifier} pathIdentifier
+     * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}
      */
     getDirectoryContents(pathIdentifier) {
-        return this.dropboxClient.getDirectoryContents(pathIdentifier.identifier).then(contents =>
+        const pathItem = pathIdentifier ? pathIdentifier.identifier : "/";
+        return this.dropboxClient.getDirectoryContents(pathItem).then(contents =>
             contents.map(item => ({
                 identifier: item.path,
                 name: item.name,

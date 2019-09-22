@@ -26,11 +26,12 @@ class WebDAVInterface extends FileSystemInterface {
 
     /**
      * Get remote directory contents
-     * @param {PathIdentifier} pathIdentifier
+     * @param {PathIdentifier=} pathIdentifier
      * @returns {Promise.<Array.<FileItem>>}
      */
     getDirectoryContents(pathIdentifier) {
-        return this.webdavClient.getDirectoryContents(pathIdentifier.identifier).then(contents =>
+        const pathItem = pathIdentifier ? pathIdentifier.identifier : "/";
+        return this.webdavClient.getDirectoryContents(pathItem).then(contents =>
             contents.map(item => ({
                 identifier: item.filename,
                 name: item.basename,
