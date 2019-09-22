@@ -3,6 +3,7 @@ const fs = require("fs");
 const joinPath = require("join-path");
 const pify = require("pify");
 const rimraf = require("rimraf");
+const fileExists = require("file-exists");
 const NodeFSInterface = require("../../source/interfaces/NodeFSInterface.js");
 
 const readFile = pify(fs.readFile);
@@ -13,6 +14,23 @@ const tmpFile = path.resolve(__dirname, "../NodeFSInterface-resources/testfile.t
 describe("NodeFSInterface", function() {
     beforeEach(function() {
         this.interface = new NodeFSInterface({ fs });
+    });
+
+    describe("deleteFile", function() {
+        beforeEach(function(done) {
+            fs.writeFile(tmpFile, "test", () => {
+                setTimeout(done, 250);
+            });
+        });
+
+        it("deletes files", function() {
+            return this.interface
+                .deleteFile({ identifier: tmpFile })
+                .then(() => fileExists(tmpFile))
+                .then(exists => {
+                    expect(exists).to.be.false;
+                });
+        });
     });
 
     describe("getDirectoryContents", function() {
