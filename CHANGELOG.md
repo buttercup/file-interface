@@ -1,7 +1,14 @@
 # File Interface changelog
 
+## v0.3.1
+_2019-09-29_
+
+ * **Bugfix**:
+   * Dropbox client used incorrect value when putting file contents
+   * WebDAV client used incorrect value when putting file contents
+
 ## v0.3.0
-_2019-02-22_
+_2019-09-22_
 
  * `deleteFile` method
 
