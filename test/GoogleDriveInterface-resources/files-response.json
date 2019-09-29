@@ -1,0 +1,52 @@
+[
+    {
+        "id": "1yTlIzvJou28_sFrBTLtrGRzE8I6f72_r",
+        "filename": "root.bcup",
+        "parents": [
+            "0AIJ3FY-p6DJlUk9JJJ"
+        ],
+        "mime": "text/plain",
+        "type": "file",
+        "created": "2019-03-09T12:28:35.312Z",
+        "modified": "2019-08-29T04:25:13.985Z",
+        "shared": false,
+        "size": 4020
+    },
+    {
+        "id": "1ejek2Yf7HebZ0ZFxy4KSU4ERP86rvhvJ3",
+        "filename": "Vaults",
+        "parents": [
+            "0AIJ3FY-p6DJlUk9JJJ"
+        ],
+        "mime": "application/vnd.google-apps.folder",
+        "type": "directory",
+        "created": "2014-01-04T22:08:29.408Z",
+        "modified": "2014-01-04T22:08:29.408Z",
+        "shared": false,
+        "size": 0
+    },
+    {
+        "id": "1Dp-ZTQNnvfFRh0DU2Bh-IgB3SFKvoNul",
+        "filename": "sub.bcup",
+        "parents": [
+            "1ejek2Yf7HebZ0ZFxy4KSU4ERP86rvhvJ3"
+        ],
+        "mime": "text/plain",
+        "type": "file",
+        "created": "2019-08-28T19:36:00.536Z",
+        "modified": "2019-08-28T19:36:25.576Z",
+        "shared": false,
+        "size": 948
+    },
+    {
+        "id": "0B9WIeRGGnj9-R0hHRzlMHjU2Ym1kWjh5bnVZZVc0QWxmMWh0",
+        "filename": "root.pdf",
+        "parents": [],
+        "mime": "application/pdf",
+        "type": "file",
+        "created": "2019-04-29T09:28:00.000Z",
+        "modified": "2019-05-12T13:13:55.943Z",
+        "shared": true,
+        "size": 103786
+    }
+]
