@@ -79,7 +79,10 @@ class WebDAVInterface extends FileSystemInterface {
         const filename = fileIdentifier.identifier
             ? fileIdentifier.identifier
             : joinPath(parentPathIdentifier.identifier, fileIdentifier.name);
-        return this.webdavClient.putFileContents(filename, data).then(() => fileIdentifier);
+        return this.webdavClient.putFileContents(filename, data).then(() => ({
+            identifier: filename,
+            name: fileIdentifier.name
+        }));
     }
 }
 

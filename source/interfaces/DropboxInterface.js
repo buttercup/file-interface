@@ -71,7 +71,10 @@ class DropboxInterface extends FileSystemInterface {
         const writePath = fileIdentifier.identifier
             ? fileIdentifier.identifier
             : joinPath(parentPathIdentifier.identifier, fileIdentifier.name);
-        return this.dropboxClient.putFileContents(writePath, data).then(() => fileIdentifier);
+        return this.dropboxClient.putFileContents(writePath, data).then(() => ({
+            identifier: writePath,
+            name: fileIdentifier.name
+        }));
     }
 }
 
