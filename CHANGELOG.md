@@ -1,5 +1,12 @@
 # File Interface changelog
 
+## v0.3.2
+_2019-10-10_
+
+ * **Bugfix**:
+   * Dropbox client `putFileContents` wouldn't return connect identifier for `null` (creation)
+   * WebDAV client `putFileContents` wouldn't return connect identifier for `null` (creation)
+
 ## v0.3.1
 _2019-09-29_
 
