@@ -46,11 +46,16 @@ class GoogleDriveInterface extends FileSystemInterface {
                 // Root dir
                 const allIDs = files.map(file => file.id);
                 files.forEach(file => {
-                    file.parents.forEach(parentID => {
-                        if (allIDs.indexOf(parentID) === -1) {
-                            selectedFiles.push(file);
-                        }
-                    });
+                    // Shared files have no parents
+                    if (file.shared && file.parents && file.parents.length === 0) {
+                        selectedFiles.push(file);
+                    } else {
+                        file.parents.forEach(parentID => {
+                            if (allIDs.indexOf(parentID) === -1) {
+                                selectedFiles.push(file);
+                            }
+                        });
+                    }
                 });
             } else {
                 // Sub dir
