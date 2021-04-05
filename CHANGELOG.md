@@ -1,5 +1,11 @@
 # File Interface changelog
 
+## v0.3.3
+_2021-04-05_
+
+ * **Bugfix**
+   * Google Drive shared files would not show up
+
 ## v0.3.2
 _2019-10-10_
 
