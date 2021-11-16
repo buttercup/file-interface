@@ -22,7 +22,9 @@ None of these packages are included in this repository and are expected to be pr
 
 To create each of the interfaces, run the following:
 
-```javascript
+```typescript
+import { instantiateInterface } from "@buttercup/file-interface";
+
 const fsInterface = instantiateInterface("fs", { fs });
 const googleDriveInterface = instantiateInterface("googledrive", { googleDriveClient });
 const dropboxInterface = instantiateInterface("dropbox", { dropboxClient });
@@ -35,15 +37,15 @@ Install by running: `npm install @buttercup/file-interface --save`
 
 ### Environment support
 
-This library supports NodeJS version 8 and above. It is not transpiled and uses commonjs2 style modules.
+This library supports NodeJS version 10 and above.
 
 ## Usage
 
 An interface is created when required, once you have the necessary components for the interface to function:
 
-```javascript
-const { instantiateInterface } = require("@buttercup/file-interface");
-const fs = require("fs");
+```typescript
+import { instantiateInterface } from "@buttercup/file-interface";
+import fs from "fs";
 
 const fsInterface = instantiateInterface("fs", { fs });
 fsInterface.getDirectoryContents({ identifier: "./dirname" }).then(results => {
@@ -61,9 +63,9 @@ fsInterface.getDirectoryContents({ identifier: "./dirname" }).then(results => {
 
 You'll notice a lot of _identifier_ usage when calling methods provided by this library. As some remote systems require more information, the API for this project uses identifier objects (parent and file) to collect information that better describes remote objects in enough detail to be usable across file systems. Google Drive, for example, doesn't use typical paths - instead files and directories are referred to by IDs:
 
-```javascript
-const { instantiateInterface } = require("@buttercup/file-interface");
-const { createClient } = require("@buttercup/googledrive-client");
+```typescript
+import { instantiateInterface } from "@buttercup/file-interface";
+import { createClient } from "@buttercup/googledrive-client";
 
 const googleDriveClient = createClient(myToken);
 const fsInterface = instantiateInterface("googledrive", { googleDriveClient });
@@ -100,8 +102,6 @@ fsInterface.putFileContents(
     // }
 });
 ```
-
-Make sure to refer to the [API documentation](API.md) for more information.
 
 ### Supported fields
 
