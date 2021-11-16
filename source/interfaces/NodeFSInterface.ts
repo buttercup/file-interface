@@ -1,39 +1,28 @@
-const VError = require("verror");
-const joinPath = require("join-path");
-const FileSystemInterface = require("../FileSystemInterface.js");
-const { registerInterface } = require("../register.js");
+import { Layerr } from "verror";
+import joinPath from "join-path";
+import { FileSystemInterface } from "../FileSystemInterface";
+import { registerInterface } from "../register";
+import { FileIdentifier, FileItem, NodeFSInterfaceConfig, PathIdentifier } from "../types";
 
-/**
- * @typedef {Object} NodeFSInterfaceConfig
- * @property {Object} fs - Reference to Node's fs API
- */
+export class NodeFSInterface extends FileSystemInterface {
+    fs: any;
 
-/**
- * Node's FS interface
- * @augments FileSystemInterface
- * @memberof module:FileInterface
- */
-class NodeFSInterface extends FileSystemInterface {
-    /**
-     * Constructor for the interface
-     * @param {NodeFSInterfaceConfig} config
-     */
-    constructor(config) {
-        super();
+    constructor(config: NodeFSInterfaceConfig) {
+        super(config);
         this.fs = config.fs;
     }
 
     /**
      * Delete a local file
-     * @param {FileIdentifier} fileIdentifier
-     * @returns {Promise}
+     * @param fileIdentifier The file identifier to delete
+     * @returns A promise that resolves after deletion is complete
      */
-    deleteFile(fileIdentifier) {
-        return new Promise((resolve, reject) => {
-            this.fs.unlink(fileIdentifier.identifier, err => {
+    deleteFile(fileIdentifier: FileIdentifier): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            this.fs.unlink(fileIdentifier.identifier, (err?: Error) => {
                 if (err) {
                     return reject(
-                        new VError(err, `Failed to delete file: ${fileIdentifier.identifier}`)
+                        new Layerr(err, `Failed to delete file: ${fileIdentifier.identifier}`)
                     );
                 }
                 resolve();
@@ -43,21 +32,21 @@ class NodeFSInterface extends FileSystemInterface {
 
     /**
      * Get local directory contents
-     * @param {PathIdentifier=} pathIdentifier
-     * @returns {Promise.<Array.<FileItem>>}
+     * @param pathIdentifier The path identifier to get the contents of
+     * @returns An array of file items
      */
-    getDirectoryContents(pathIdentifier) {
+    getDirectoryContents(pathIdentifier?: PathIdentifier): Promise<Array<FileItem>> {
         const { identifier: dir = "/" } = pathIdentifier || {};
-        const fetch = new Promise((resolve, reject) => {
-            this.fs.readdir(dir, (err, filenames) => {
+        const fetch = new Promise<Array<string>>((resolve, reject) => {
+            this.fs.readdir(dir, (err: Error | null, filenames: Array<string>) => {
                 if (err) {
-                    return reject(new VError(err, `Error reading directory contents: ${dir}`));
+                    return reject(new Layerr(err, `Error reading directory contents: ${dir}`));
                 }
                 resolve(filenames);
             });
         });
         return fetch.then(filenames =>
-            this._filenamesToStats(dir, filenames).then(items =>
+            this._filenamesToStats(dir as string, filenames).then(items =>
                 items.map(item =>
                     Object.assign(item, {
                         parent: pathIdentifier
@@ -69,15 +58,15 @@ class NodeFSInterface extends FileSystemInterface {
 
     /**
      * Get local file contents
-     * @param {PathIdentifier} pathIdentifier
-     * @returns {Promise.<String>}
+     * @param pathIdentifier The target file path identifier
+     * @returns The file contents
      */
-    getFileContents(pathIdentifier) {
+    getFileContents(pathIdentifier: PathIdentifier): Promise<string> {
         const { identifier: filename } = pathIdentifier;
         return new Promise((resolve, reject) => {
             this.fs.readFile(filename, "utf8", (err, data) => {
                 if (err) {
-                    return reject(new VError(err, `Error reading file: ${filename}`));
+                    return reject(new Layerr(err, `Error reading file: ${filename}`));
                 }
                 resolve(data);
             });
@@ -93,19 +82,23 @@ class NodeFSInterface extends FileSystemInterface {
 
     /**
      * Write local file contents
-     * @param {PathIdentifier} parentPathIdentifier
-     * @param {FileIdentifier} fileIdentifier
-     * @param {String} data File data
-     * @returns {Promise.<FileIdentifier>}
+     * @param parentPathIdentifier The parent path identifier
+     * @param fileIdentifier The file identifier to write to
+     * @param data File data
+     * @returns A promise that resolves with the identifier of the written file
      */
-    putFileContents(parentPathIdentifier, fileIdentifier, data) {
+    putFileContents(
+        parentPathIdentifier: PathIdentifier,
+        fileIdentifier: FileIdentifier,
+        data: string
+    ): Promise<FileIdentifier> {
         const filename = fileIdentifier.identifier
             ? fileIdentifier.identifier
             : joinPath(parentPathIdentifier.identifier, fileIdentifier.name);
         return new Promise((resolve, reject) => {
             this.fs.writeFile(filename, data, err => {
                 if (err) {
-                    return reject(new VError(err, `Error writing file: ${filename}`));
+                    return reject(new Layerr(err, `Error writing file: ${filename}`));
                 }
                 resolve({
                     identifier: filename,
@@ -115,22 +108,16 @@ class NodeFSInterface extends FileSystemInterface {
         });
     }
 
-    /**
-     * @protected
-     */
-    _filenamesToStats(dir, filenames) {
+    protected _filenamesToStats(dir: string, filenames: Array<string>): Promise<Array<FileItem>> {
         return Promise.all(filenames.map(filename => this._stat(dir, filename)));
     }
 
-    /**
-     * @protected
-     */
-    _stat(dir, filename) {
+    protected _stat(dir: string, filename: string): Promise<FileItem> {
         const fullPath = joinPath(dir, filename);
         return new Promise((resolve, reject) => {
             this.fs.stat(fullPath, (err, stat) => {
                 if (err) {
-                    return reject(new VError(err, `Failed getting file properties: ${filename}`));
+                    return reject(new Layerr(err, `Failed getting file properties: ${filename}`));
                 }
                 const { ctime, mtime, size } = stat;
                 const type = stat.isDirectory() ? "directory" : "file";
@@ -150,5 +137,3 @@ class NodeFSInterface extends FileSystemInterface {
 }
 
 registerInterface("fs", NodeFSInterface);
-
-module.exports = NodeFSInterface;
