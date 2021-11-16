@@ -4,26 +4,26 @@ const joinPath = require("join-path");
 const pify = require("pify");
 const rimraf = require("rimraf");
 const fileExists = require("file-exists");
-const NodeFSInterface = require("../../source/interfaces/NodeFSInterface.js");
+const { NodeFSInterface } = require("../../dist/interfaces/NodeFSInterface.js");
 
 const readFile = pify(fs.readFile);
 
 const targetPath = path.resolve(__dirname, "../NodeFSInterface-resources");
 const tmpFile = path.resolve(__dirname, "../NodeFSInterface-resources/testfile.tmp");
 
-describe("NodeFSInterface", function() {
-    beforeEach(function() {
+describe("NodeFSInterface", function () {
+    beforeEach(function () {
         this.interface = new NodeFSInterface({ fs });
     });
 
-    describe("deleteFile", function() {
-        beforeEach(function(done) {
+    describe("deleteFile", function () {
+        beforeEach(function (done) {
             fs.writeFile(tmpFile, "test", () => {
                 setTimeout(done, 250);
             });
         });
 
-        it("deletes files", function() {
+        it("deletes files", function () {
             return this.interface
                 .deleteFile({ identifier: tmpFile })
                 .then(() => fileExists(tmpFile))
@@ -33,8 +33,8 @@ describe("NodeFSInterface", function() {
         });
     });
 
-    describe("getDirectoryContents", function() {
-        it("returns an array of items", function() {
+    describe("getDirectoryContents", function () {
+        it("returns an array of items", function () {
             return this.interface
                 .getDirectoryContents({ identifier: targetPath })
                 .then(contents => {
@@ -43,8 +43,8 @@ describe("NodeFSInterface", function() {
                 });
         });
 
-        describe("returned items", function() {
-            beforeEach(function() {
+        describe("returned items", function () {
+            beforeEach(function () {
                 return this.interface
                     .getDirectoryContents({ identifier: targetPath })
                     .then(contents => {
@@ -52,7 +52,7 @@ describe("NodeFSInterface", function() {
                     });
             });
 
-            it("correctly sets name & identifier properties", function() {
+            it("correctly sets name & identifier properties", function () {
                 const fileItem = this.contents.find(item => item.name === "rootfile.txt");
                 expect(fileItem).to.have.property(
                     "identifier",
@@ -60,30 +60,30 @@ describe("NodeFSInterface", function() {
                 );
             });
 
-            it("correctly identify directories", function() {
+            it("correctly identify directories", function () {
                 const dirItem = this.contents.find(item => item.name === "somedir");
                 expect(dirItem).to.have.property("type", "directory");
             });
 
-            it("correctly identify files", function() {
+            it("correctly identify files", function () {
                 const fileItem = this.contents.find(item => item.name === "rootfile.txt");
                 expect(fileItem).to.have.property("type", "file");
             });
 
-            it("has correct file size", function() {
+            it("has correct file size", function () {
                 const fileItem = this.contents.find(item => item.name === "rootfile.txt");
                 expect(fileItem).to.have.property("size", 14);
             });
 
-            it("has correct directory size (0)", function() {
+            it("has correct directory size (0)", function () {
                 const dirItem = this.contents.find(item => item.name === "somedir");
                 expect(dirItem).to.have.property("size", 0);
             });
         });
     });
 
-    describe("getFileContents", function() {
-        it("returns correct file contents", function() {
+    describe("getFileContents", function () {
+        it("returns correct file contents", function () {
             const filename = joinPath(targetPath, "rootfile.txt");
             return this.interface.getFileContents({ identifier: filename }).then(contents => {
                 expect(contents.trim()).to.equal("root-file-txt");
@@ -91,8 +91,8 @@ describe("NodeFSInterface", function() {
         });
     });
 
-    describe("putFileContents", function() {
-        afterEach(function() {
+    describe("putFileContents", function () {
+        afterEach(function () {
             return new Promise((resolve, reject) => {
                 rimraf(tmpFile, err => {
                     if (err) {
@@ -103,7 +103,7 @@ describe("NodeFSInterface", function() {
             });
         });
 
-        it("writes correct contents", function() {
+        it("writes correct contents", function () {
             return this.interface
                 .putFileContents(
                     { identifier: targetPath },
@@ -116,7 +116,7 @@ describe("NodeFSInterface", function() {
                 });
         });
 
-        it("returns correct identifier", function() {
+        it("returns correct identifier", function () {
             return this.interface
                 .putFileContents(
                     { identifier: targetPath },

@@ -1,44 +1,32 @@
-const VError = require("verror");
-const joinPath = require("join-path");
-const FileSystemInterface = require("../FileSystemInterface.js");
-const { registerInterface } = require("../register.js");
+import { FileSystemInterface } from "../FileSystemInterface";
+import { registerInterface } from "../register";
+import { FileIdentifier, FileItem, GoogleDriveInterfaceConfig, PathIdentifier } from "../types";
 
-/**
- * @typedef {Object} GoogleDriveInterfaceConfig
- * @property {Object} googleDriveClient - Google Drive client
- *  instance
- */
+export class GoogleDriveInterface extends FileSystemInterface {
+    googleDriveClient: any;
 
-/**
- * Google Drive interface
- * @augments FileSystemInterface
- * @memberof module:FileInterface
- */
-class GoogleDriveInterface extends FileSystemInterface {
-    /**
-     * Constructor for the interface
-     * @param {GoogleDriveInterfaceConfig} config
-     */
-    constructor(config) {
-        super();
+    constructor(config: GoogleDriveInterfaceConfig) {
+        super(config);
         this.googleDriveClient = config.googleDriveClient;
     }
 
     /**
      * Delete a remote file
-     * @param {FileIdentifier} fileIdentifier
-     * @returns {Promise}
+     * @param fileIdentifier The remote file identifier to delete
+     * @returns A promise that resolves once deletion is complete
      */
-    deleteFile(fileIdentifier) {
+    deleteFile(fileIdentifier: FileIdentifier): Promise<void> {
         return this.googleDriveClient.deleteFile(fileIdentifier.identifier);
     }
 
     /**
      * Get remote directory contents
-     * @param {PathIdentifier=} pathIdentifier
-     * @returns {Promise.<Array.<FileItem>>}
+     * @param pathIdentifier The path identifier to get the
+     *  contents of
+     * @returns A promise resolving with the contents of the
+     *  remote directory
      */
-    getDirectoryContents(pathIdentifier) {
+    getDirectoryContents(pathIdentifier?: PathIdentifier): Promise<Array<FileItem>> {
         const { identifier: parentID = null } = pathIdentifier || {};
         return this.googleDriveClient.getDirectoryContents({ tree: false }).then(files => {
             const selectedFiles = [];
@@ -80,42 +68,45 @@ class GoogleDriveInterface extends FileSystemInterface {
 
     /**
      * Get remote file contents
-     * @param {PathIdentifier} pathIdentifier
-     * @returns {Promise.<String>}
+     * @param pathIdentifier The identifer to fetch the contents of
+     * @returns A promise resolving with the file's contents
      */
-    getFileContents(fileIdentifier) {
+    getFileContents(fileIdentifier: PathIdentifier): Promise<string> {
         return this.googleDriveClient.getFileContents(fileIdentifier.identifier);
     }
 
     /**
+     * The supported interface features
      * @see FileSystemInterface#getSupportedFeatures
      */
-    getSupportedFeatures() {
+    getSupportedFeatures(): Array<string> {
         return [...super.getSupportedFeatures(), "created", "mime", "modified"];
     }
 
     /**
      * Write remote file contents
-     * @param {PathIdentifier} parentPathIdentifier
-     * @param {FileIdentifier} fileIdentifier
-     * @param {String} data File data
-     * @returns {Promise.<FileIdentifier>}
+     * @param parentPathIdentifier The parent directory identifier
+     * @param fileIdentifier The target file identifier
+     * @param data File data
+     * @returns A promise resolving with the file identifier written
+     *  to
      */
-    putFileContents(parentPathIdentifier, fileIdentifier, data) {
-        return this.googleDriveClient
-            .putFileContents({
-                id: fileIdentifier.identifier,
-                parent: parentPathIdentifier.identifier,
-                name: fileIdentifier.name,
-                contents: data
-            })
-            .then(fileID => ({
-                identifier: fileID || fileIdentifier.identifier,
-                name: fileIdentifier.name
-            }));
+    async putFileContents(
+        parentPathIdentifier: PathIdentifier,
+        fileIdentifier: FileIdentifier,
+        data: string
+    ): Promise<FileIdentifier> {
+        const fileID = await this.googleDriveClient.putFileContents({
+            id: fileIdentifier.identifier,
+            parent: parentPathIdentifier.identifier,
+            name: fileIdentifier.name,
+            contents: data
+        });
+        return {
+            identifier: fileID || fileIdentifier.identifier,
+            name: fileIdentifier.name
+        };
     }
 }
 
 registerInterface("googledrive", GoogleDriveInterface);
-
-module.exports = GoogleDriveInterface;
