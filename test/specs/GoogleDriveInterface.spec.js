@@ -1,11 +1,9 @@
-const path = require("path");
-const joinPath = require("join-path");
-const GoogleDriveInterface = require("../../source/interfaces/GoogleDriveInterface.js");
+const { GoogleDriveInterface } = require("../../dist/interfaces/GoogleDriveInterface.js");
 
 const testResponse = require("../GoogleDriveInterface-resources/files-response.json");
 
-describe("GoogleDriveInterface", function() {
-    beforeEach(function() {
+describe("GoogleDriveInterface", function () {
+    beforeEach(function () {
         this.googleDriveClient = {
             deleteFile: sinon.stub().returns(Promise.resolve()),
             getDirectoryContents: sinon.stub().returns(Promise.resolve(testResponse)),
@@ -17,8 +15,8 @@ describe("GoogleDriveInterface", function() {
         this.interface = new GoogleDriveInterface({ googleDriveClient: this.googleDriveClient });
     });
 
-    describe("deleteFile", function() {
-        it("passes the file identifier", function() {
+    describe("deleteFile", function () {
+        it("passes the file identifier", function () {
             return this.interface
                 .deleteFile({ identifier: "1yTlIzvJou28_sFrBTLtrGRzE8I6f72_r" })
                 .then(() => {
@@ -31,8 +29,8 @@ describe("GoogleDriveInterface", function() {
         });
     });
 
-    describe("getDirectoryContents", function() {
-        it("calls getDirectoryContents with tree:false", function() {
+    describe("getDirectoryContents", function () {
+        it("calls getDirectoryContents with tree:false", function () {
             return this.interface.getDirectoryContents({ identifier: null }).then(() => {
                 expect(
                     this.googleDriveClient.getDirectoryContents.calledWithExactly({ tree: false })
@@ -40,21 +38,21 @@ describe("GoogleDriveInterface", function() {
             });
         });
 
-        it("returns an array of items", function() {
+        it("returns an array of items", function () {
             return this.interface.getDirectoryContents({ identifier: null }).then(contents => {
                 expect(contents).to.be.an("array");
                 expect(contents).to.have.length.above(0);
             });
         });
 
-        describe("returned items (root)", function() {
-            beforeEach(function() {
+        describe("returned items (root)", function () {
+            beforeEach(function () {
                 return this.interface.getDirectoryContents({ identifier: null }).then(contents => {
                     this.contents = contents;
                 });
             });
 
-            it("correctly sets name & identifier properties", function() {
+            it("correctly sets name & identifier properties", function () {
                 const fileItem = this.contents.find(item => item.name === "root.bcup");
                 expect(fileItem).to.have.property(
                     "identifier",
@@ -62,29 +60,29 @@ describe("GoogleDriveInterface", function() {
                 );
             });
 
-            it("correctly identify directories", function() {
+            it("correctly identify directories", function () {
                 const dirItem = this.contents.find(item => item.name === "Vaults");
                 expect(dirItem).to.have.property("type", "directory");
             });
 
-            it("correctly identify files", function() {
+            it("correctly identify files", function () {
                 const fileItem = this.contents.find(item => item.name === "root.bcup");
                 expect(fileItem).to.have.property("type", "file");
             });
 
-            it("has correct file size", function() {
+            it("has correct file size", function () {
                 const fileItem = this.contents.find(item => item.name === "root.bcup");
                 expect(fileItem).to.have.property("size", 4020);
             });
 
-            it("has correct directory size (0)", function() {
+            it("has correct directory size (0)", function () {
                 const dirItem = this.contents.find(item => item.name === "Vaults");
                 expect(dirItem).to.have.property("size", 0);
             });
         });
 
-        describe("returned items (sub-dir)", function() {
-            beforeEach(function() {
+        describe("returned items (sub-dir)", function () {
+            beforeEach(function () {
                 return this.interface
                     .getDirectoryContents({ identifier: "1ejek2Yf7HebZ0ZFxy4KSU4ERP86rvhvJ3" })
                     .then(contents => {
@@ -92,7 +90,7 @@ describe("GoogleDriveInterface", function() {
                     });
             });
 
-            it("correctly sets name & identifier properties", function() {
+            it("correctly sets name & identifier properties", function () {
                 const fileItem = this.contents.find(item => item.name === "sub.bcup");
                 expect(fileItem).to.have.property(
                     "identifier",
@@ -100,20 +98,20 @@ describe("GoogleDriveInterface", function() {
                 );
             });
 
-            it("has correct file size", function() {
+            it("has correct file size", function () {
                 const fileItem = this.contents.find(item => item.name === "sub.bcup");
                 expect(fileItem).to.have.property("size", 948);
             });
 
-            it("has correct mime", function() {
+            it("has correct mime", function () {
                 const fileItem = this.contents.find(item => item.name === "sub.bcup");
                 expect(fileItem).to.have.property("mime", "text/plain");
             });
         });
     });
 
-    describe("getFileContents", function() {
-        it("returns correct file contents", function() {
+    describe("getFileContents", function () {
+        it("returns correct file contents", function () {
             return this.interface
                 .getFileContents({ identifier: "1yTlIzvJou28_sFrBTLtrGRzE8I6f72_r" })
                 .then(contents => {
@@ -121,7 +119,7 @@ describe("GoogleDriveInterface", function() {
                 });
         });
 
-        it("requests using the correct ID", function() {
+        it("requests using the correct ID", function () {
             return this.interface
                 .getFileContents({ identifier: "1yTlIzvJou28_sFrBTLtrGRzE8I6f72_r" })
                 .then(contents => {
@@ -134,8 +132,8 @@ describe("GoogleDriveInterface", function() {
         });
     });
 
-    describe("putFileContents", function() {
-        it("writes new files", function() {
+    describe("putFileContents", function () {
+        it("writes new files", function () {
             return this.interface
                 .putFileContents(
                     { identifier: null },
@@ -154,7 +152,7 @@ describe("GoogleDriveInterface", function() {
                 });
         });
 
-        it("returns correct identifier", function() {
+        it("returns correct identifier", function () {
             return this.interface
                 .putFileContents(
                     { identifier: null },
