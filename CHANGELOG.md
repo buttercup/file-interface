@@ -1,5 +1,10 @@
 # File Interface changelog
 
+## v1.0.0
+_2021-11-16_
+
+ * Typescript
+
 ## v0.3.3
 _2021-04-05_
 

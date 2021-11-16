@@ -2,15 +2,20 @@
   "name": "@buttercup/file-interface",
   "version": "0.3.3",
   "description": "Client request library interface and explorer",
-  "main": "source/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf dist",
     "format": "prettier --write '{source,test}/**/*.{js,ts}'",
+    "prepublishOnly": "npm run build",
     "test": "run-s build test:specs test:format",
     "test:format": "prettier --check '{source,test}/**/*.{js,ts}'",
     "test:specs": "nyc mocha -r test/index.js 'test/specs/**/*.spec.js'"
   },
+  "files": [
+    "dist/**"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
