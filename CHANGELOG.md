@@ -1,5 +1,10 @@
 # File Interface changelog
 
+## v1.0.1
+_2021-11-16_
+
+ * Export types
+
 ## v1.0.0
 _2021-11-16_
 
