@@ -1,5 +1,10 @@
 # File Interface changelog
 
+## v1.1.0
+_2021-11-22_
+
+ * `putDirectory` method
+
 ## v1.0.1
 _2021-11-16_
 
