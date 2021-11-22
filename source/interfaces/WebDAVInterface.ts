@@ -59,6 +59,29 @@ export class WebDAVInterface extends FileSystemInterface {
     }
 
     /**
+     * Create a new directory
+     * @param parentPathIdentifier The parent path to create inside, or
+     *  null to indicate the root
+     * @param fileIdentifier The identifier to create
+     * @returns The newly created directory identifier
+     */
+    async putDirectory(
+        parentPathIdentifier: PathIdentifier | null,
+        fileIdentifier: FileIdentifier
+    ): Promise<FileIdentifier> {
+        const dirPath = fileIdentifier.identifier
+            ? fileIdentifier.identifier
+            : parentPathIdentifier
+            ? joinPath(parentPathIdentifier.identifier, fileIdentifier.name)
+            : joinPath("/", fileIdentifier.name);
+        await this.webdavClient.createDirectory(dirPath);
+        return {
+            identifier: dirPath,
+            name: fileIdentifier.name
+        };
+    }
+
+    /**
      * Write remote file contents
      * @param parentPathIdentifier The parent path to write into
      * @param fileIdentifier The target file to write to

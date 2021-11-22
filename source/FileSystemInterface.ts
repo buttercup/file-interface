@@ -42,6 +42,20 @@ export class FileSystemInterface {
     }
 
     /**
+     * Create a new directory
+     * @param parentPathIdentifier The parent path to create inside, or
+     *  null to indicate the root
+     * @param fileIdentifier The identifier to create
+     * @returns The newly created directory identifier
+     */
+    async putDirectory(
+        parentPathIdentifier: PathIdentifier | null,
+        fileIdentifier: FileIdentifier
+    ): Promise<FileIdentifier> {
+        throw new Error("Not implemented");
+    }
+
+    /**
      * Write a file to the storage system
      * @param parentPathIdentifier The parent path
      *  identifer that contains/will-contain the file

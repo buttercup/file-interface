@@ -84,6 +84,33 @@ export class GoogleDriveInterface extends FileSystemInterface {
     }
 
     /**
+     * Create a new directory
+     * @param parentPathIdentifier The parent path to create inside, or
+     *  null to indicate the root
+     * @param fileIdentifier The identifier to create
+     * @returns The newly created directory identifier
+     */
+    async putDirectory(
+        parentPathIdentifier: PathIdentifier | null,
+        fileIdentifier: FileIdentifier
+    ): Promise<FileIdentifier> {
+        const options: {
+            name: string;
+            parent?: string;
+        } = {
+            name: fileIdentifier.name
+        };
+        if (parentPathIdentifier) {
+            options.parent = parentPathIdentifier.identifier as string;
+        }
+        const folderID = await this.googleDriveClient.createDirectory(options);
+        return {
+            identifier: folderID,
+            name: fileIdentifier.name
+        };
+    }
+
+    /**
      * Write remote file contents
      * @param parentPathIdentifier The parent directory identifier
      * @param fileIdentifier The target file identifier

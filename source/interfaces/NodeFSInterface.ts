@@ -81,6 +81,36 @@ export class NodeFSInterface extends FileSystemInterface {
     }
 
     /**
+     * Create a new directory
+     * @param parentPathIdentifier The parent path to create inside, or
+     *  null to indicate the root
+     * @param fileIdentifier The identifier to create
+     * @returns The newly created directory identifier
+     */
+    async putDirectory(
+        parentPathIdentifier: PathIdentifier | null,
+        fileIdentifier: FileIdentifier
+    ): Promise<FileIdentifier> {
+        const dirPath = fileIdentifier.identifier
+            ? fileIdentifier.identifier
+            : parentPathIdentifier
+            ? joinPath(parentPathIdentifier.identifier, fileIdentifier.name)
+            : joinPath("/", fileIdentifier.name);
+        await new Promise<void>((resolve, reject) => {
+            this.fs.mkdir(dirPath, {}, (err?: Error) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
+        });
+        return {
+            identifier: dirPath,
+            name: fileIdentifier.name
+        };
+    }
+
+    /**
      * Write local file contents
      * @param parentPathIdentifier The parent path identifier
      * @param fileIdentifier The file identifier to write to
