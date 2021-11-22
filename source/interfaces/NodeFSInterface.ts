@@ -1,4 +1,4 @@
-import { Layerr } from "verror";
+import { Layerr } from "layerr";
 import joinPath from "join-path";
 import { FileSystemInterface } from "../FileSystemInterface";
 import { registerInterface } from "../register";
