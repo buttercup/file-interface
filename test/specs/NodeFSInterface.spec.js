@@ -4,12 +4,14 @@ const joinPath = require("join-path");
 const pify = require("pify");
 const rimraf = require("rimraf");
 const fileExists = require("file-exists");
+const dirExists = require("directory-exists");
 const { NodeFSInterface } = require("../../dist/interfaces/NodeFSInterface.js");
 
 const readFile = pify(fs.readFile);
 
 const targetPath = path.resolve(__dirname, "../NodeFSInterface-resources");
-const tmpFile = path.resolve(__dirname, "../NodeFSInterface-resources/testfile.tmp");
+const tmpFile = path.join(targetPath, "testfile.tmp");
+const tmpDir = path.join(targetPath, "testdir");
 
 describe("NodeFSInterface", function () {
     beforeEach(function () {
@@ -88,6 +90,28 @@ describe("NodeFSInterface", function () {
             return this.interface.getFileContents({ identifier: filename }).then(contents => {
                 expect(contents.trim()).to.equal("root-file-txt");
             });
+        });
+    });
+
+    describe("putDirectory", function () {
+        afterEach(function () {
+            return new Promise((resolve, reject) => {
+                rimraf(tmpDir, err => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve();
+                });
+            });
+        });
+
+        it("creates directories at the root", async function () {
+            await this.interface.putDirectory(
+                { identifier: targetPath },
+                { identifier: null, name: "testdir" }
+            );
+            const exists = await dirExists(tmpDir);
+            expect(exists).to.be.true;
         });
     });
 
