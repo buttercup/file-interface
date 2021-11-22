@@ -48,8 +48,7 @@
   "homepage": "https://github.com/buttercup/file-interface#readme",
   "dependencies": {
     "join-path": "^1.1.1",
-    "layerr": "^0.1.2",
-    "verror": "^1.10.1"
+    "layerr": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^16.11.9",
