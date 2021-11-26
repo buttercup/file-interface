@@ -80,6 +80,15 @@ export class NodeFSInterface extends FileSystemInterface {
     }
 
     /**
+     * Check if a path identifier matches the root
+     * @param pathIdentifer The path identifier to check
+     * @returns True if root, false otherwise
+     */
+    pathIdentifierIsRoot(pathIdentifer?: PathIdentifier): boolean {
+        return !pathIdentifer || pathIdentifer?.identifier === "/";
+    }
+
+    /**
      * Create a new directory
      * @param parentPathIdentifier The parent path to create inside, or
      *  null to indicate the root

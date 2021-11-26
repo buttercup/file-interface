@@ -33,12 +33,29 @@ export class FileSystemInterface {
     }
 
     /**
+     * Get the root path identifer for this service
+     * @returns A path identifier, or null
+     */
+    getRootPathIdentifier(): PathIdentifier {
+        return null;
+    }
+
+    /**
      * Detect what features are supported by this interface
      * (returns things like "created", "mime", "modified")
      * @returns An array of supported feature slugs
      */
     getSupportedFeatures(): Array<string> {
         return [];
+    }
+
+    /**
+     * Check if a path identifier matches the root
+     * @param pathIdentifer The path identifier to check
+     * @returns True if root, false otherwise
+     */
+    pathIdentifierIsRoot(pathIdentifer?: PathIdentifier): boolean {
+        throw new Error("Not implemented");
     }
 
     /**
