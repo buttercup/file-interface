@@ -1,5 +1,11 @@
 # File Interface changelog
 
+## v2.0.0
+_2021-11-26_
+
+ * Removed registration functionality (manual instantiation only)
+ * Root path identifier handling
+
 ## v1.1.0
 _2021-11-22_
 
