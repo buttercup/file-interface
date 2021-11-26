@@ -1,6 +1,5 @@
 import joinPath from "join-path";
 import { FileSystemInterface } from "../FileSystemInterface";
-import { registerInterface } from "../register";
 import { FileIdentifier, FileItem, PathIdentifier, WebDAVInterfaceConfig } from "../types";
 
 export class WebDAVInterface extends FileSystemInterface {
@@ -103,5 +102,3 @@ export class WebDAVInterface extends FileSystemInterface {
         };
     }
 }
-
-registerInterface("webdav", WebDAVInterface);

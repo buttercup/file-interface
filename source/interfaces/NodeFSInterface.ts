@@ -1,7 +1,6 @@
 import { Layerr } from "layerr";
 import joinPath from "join-path";
 import { FileSystemInterface } from "../FileSystemInterface";
-import { registerInterface } from "../register";
 import { FileIdentifier, FileItem, NodeFSInterfaceConfig, PathIdentifier } from "../types";
 
 export class NodeFSInterface extends FileSystemInterface {
@@ -165,5 +164,3 @@ export class NodeFSInterface extends FileSystemInterface {
         });
     }
 }
-
-registerInterface("fs", NodeFSInterface);

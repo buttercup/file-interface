@@ -1,5 +1,4 @@
 import { FileSystemInterface } from "../FileSystemInterface";
-import { registerInterface } from "../register";
 import { FileIdentifier, FileItem, GoogleDriveInterfaceConfig, PathIdentifier } from "../types";
 
 export class GoogleDriveInterface extends FileSystemInterface {
@@ -135,5 +134,3 @@ export class GoogleDriveInterface extends FileSystemInterface {
         };
     }
 }
-
-registerInterface("googledrive", GoogleDriveInterface);

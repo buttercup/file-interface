@@ -1,6 +1,5 @@
 import joinPath from "join-path";
 import { FileSystemInterface } from "../FileSystemInterface";
-import { registerInterface } from "../register";
 import { DropboxInterfaceConfig, FileIdentifier, FileItem, PathIdentifier } from "../types";
 
 export class DropboxInterface extends FileSystemInterface {
@@ -95,5 +94,3 @@ export class DropboxInterface extends FileSystemInterface {
         }));
     }
 }
-
-registerInterface("dropbox", DropboxInterface);
