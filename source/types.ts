@@ -1,3 +1,6 @@
+import type { GoogleDriveClient } from "@buttercup/googledrive-client";
+import type { WebDAVClient } from "webdav";
+
 export interface DropboxInterfaceConfig {
     dropboxClient: any;
 }
@@ -19,7 +22,7 @@ export interface FileItem {
 }
 
 export interface GoogleDriveInterfaceConfig {
-    googleDriveClient: any;
+    googleDriveClient: GoogleDriveClient;
 }
 
 export type Identifier = string | number;
@@ -34,5 +37,5 @@ export interface PathIdentifier {
 }
 
 export interface WebDAVInterfaceConfig {
-    webdavClient: any;
+    webdavClient: WebDAVClient;
 }

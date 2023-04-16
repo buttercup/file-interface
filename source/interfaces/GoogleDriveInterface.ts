@@ -1,8 +1,9 @@
-import { FileSystemInterface } from "../FileSystemInterface";
-import { FileIdentifier, FileItem, GoogleDriveInterfaceConfig, PathIdentifier } from "../types";
+import type { GoogleDriveClient } from "@buttercup/googledrive-client";
+import { FileSystemInterface } from "../FileSystemInterface.js";
+import { FileIdentifier, FileItem, GoogleDriveInterfaceConfig, PathIdentifier } from "../types.js";
 
 export class GoogleDriveInterface extends FileSystemInterface {
-    googleDriveClient: any;
+    googleDriveClient: GoogleDriveClient;
 
     constructor(config: GoogleDriveInterfaceConfig) {
         super(config);
@@ -15,7 +16,7 @@ export class GoogleDriveInterface extends FileSystemInterface {
      * @returns A promise that resolves once deletion is complete
      */
     deleteFile(fileIdentifier: FileIdentifier): Promise<void> {
-        return this.googleDriveClient.deleteFile(fileIdentifier.identifier);
+        return this.googleDriveClient.deleteFile(fileIdentifier.identifier as string);
     }
 
     /**
@@ -27,7 +28,7 @@ export class GoogleDriveInterface extends FileSystemInterface {
      */
     getDirectoryContents(pathIdentifier?: PathIdentifier): Promise<Array<FileItem>> {
         const { identifier: parentID = null } = pathIdentifier || {};
-        return this.googleDriveClient.getDirectoryContents({ tree: false }).then(files => {
+        return this.googleDriveClient.getDirectoryContents(false).then(files => {
             const selectedFiles = [];
             if (!parentID) {
                 // Root dir
@@ -47,7 +48,7 @@ export class GoogleDriveInterface extends FileSystemInterface {
             } else {
                 // Sub dir
                 files.forEach(file => {
-                    if (file.parents.indexOf(parentID) >= 0) {
+                    if (file.parents.indexOf(parentID as string) >= 0) {
                         selectedFiles.push(file);
                     }
                 });
@@ -71,7 +72,7 @@ export class GoogleDriveInterface extends FileSystemInterface {
      * @returns A promise resolving with the file's contents
      */
     getFileContents(fileIdentifier: PathIdentifier): Promise<string> {
-        return this.googleDriveClient.getFileContents(fileIdentifier.identifier);
+        return this.googleDriveClient.getFileContents(fileIdentifier.identifier as string);
     }
 
     /**
@@ -102,16 +103,12 @@ export class GoogleDriveInterface extends FileSystemInterface {
         parentPathIdentifier: PathIdentifier | null,
         fileIdentifier: FileIdentifier
     ): Promise<FileIdentifier> {
-        const options: {
-            name: string;
-            parent?: string;
-        } = {
-            name: fileIdentifier.name
-        };
+        const name = fileIdentifier.name;
+        let parentID: string;
         if (parentPathIdentifier) {
-            options.parent = parentPathIdentifier.identifier as string;
+            parentID = parentPathIdentifier.identifier as string;
         }
-        const folderID = await this.googleDriveClient.createDirectory(options);
+        const folderID = await this.googleDriveClient.createDirectory(name, parentID);
         return {
             identifier: folderID,
             name: fileIdentifier.name
@@ -131,12 +128,22 @@ export class GoogleDriveInterface extends FileSystemInterface {
         fileIdentifier: FileIdentifier,
         data: string
     ): Promise<FileIdentifier> {
-        const fileID = await this.googleDriveClient.putFileContents({
-            id: fileIdentifier.identifier,
-            parent: parentPathIdentifier.identifier,
-            name: fileIdentifier.name,
-            contents: data
-        });
+        let fileID: string;
+        if (fileIdentifier.identifier) {
+            // Existing file
+            fileID = await this.googleDriveClient.putFileContents(
+                data,
+                fileIdentifier.identifier as string
+            );
+        } else {
+            // New file
+            fileID = await this.googleDriveClient.putFileContents(
+                data,
+                null,
+                fileIdentifier.name,
+                parentPathIdentifier.identifier as string
+            );
+        }
         return {
             identifier: fileID || fileIdentifier.identifier,
             name: fileIdentifier.name

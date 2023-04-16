@@ -1,7 +1,7 @@
-export { FileSystemInterface } from "./FileSystemInterface";
-export { DropboxInterface } from "./interfaces/DropboxInterface";
-export { GoogleDriveInterface } from "./interfaces/GoogleDriveInterface";
-export { NodeFSInterface } from "./interfaces/NodeFSInterface";
-export { WebDAVInterface } from "./interfaces/WebDAVInterface";
+export { FileSystemInterface } from "./FileSystemInterface.js";
+export { DropboxInterface } from "./interfaces/DropboxInterface.js";
+export { GoogleDriveInterface } from "./interfaces/GoogleDriveInterface.js";
+export { NodeFSInterface } from "./interfaces/NodeFSInterface.js";
+export { WebDAVInterface } from "./interfaces/WebDAVInterface.js";
 
-export * from "./types";
+export * from "./types.js";

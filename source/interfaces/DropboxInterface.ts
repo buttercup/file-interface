@@ -1,6 +1,6 @@
 import joinPath from "join-path";
-import { FileSystemInterface } from "../FileSystemInterface";
-import { DropboxInterfaceConfig, FileIdentifier, FileItem, PathIdentifier } from "../types";
+import { FileSystemInterface } from "../FileSystemInterface.js";
+import { DropboxInterfaceConfig, FileIdentifier, FileItem, PathIdentifier } from "../types.js";
 
 export class DropboxInterface extends FileSystemInterface {
     dropboxClient: any;
