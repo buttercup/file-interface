@@ -1,13 +1,16 @@
-const path = require("path");
-const fs = require("fs");
-const joinPath = require("join-path");
-const pify = require("pify");
-const rimraf = require("rimraf");
-const fileExists = require("file-exists");
-const dirExists = require("directory-exists");
-const { NodeFSInterface } = require("../../dist/interfaces/NodeFSInterface.js");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import { expect } from "chai";
+import joinPath from "join-path";
+import pify from "pify";
+import rimraf from "rimraf";
+import fileExists from "file-exists";
+import dirExists from "directory-exists";
+import { NodeFSInterface } from "../../dist/interfaces/NodeFSInterface.js";
 
 const readFile = pify(fs.readFile);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const targetPath = path.resolve(__dirname, "../NodeFSInterface-resources");
 const tmpFile = path.join(targetPath, "testfile.tmp");
