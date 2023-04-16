@@ -1,15 +1,20 @@
 {
     "compilerOptions": {
-        "outDir": "./dist",
-        "module": "commonjs",
-        "declaration": true,
-        "target": "es5",
-        "esModuleInterop": true
+      "allowJs": false,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "outDir": "./dist",
+      "module": "es2020",
+      "moduleResolution": "node",
+      "declaration": true,
+      "resolveJsonModule": true,
+      "target": "es2020"
     },
     "include": [
-        "./source/**/*"
+      "source/**/*"
     ],
     "exclude":[
-        "./node_modules"
+      "./node_modules",
+      "./dist"
     ]
-}
+  }
