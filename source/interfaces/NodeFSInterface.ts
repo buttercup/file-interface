@@ -1,7 +1,7 @@
 import { Layerr } from "layerr";
 import joinPath from "join-path";
-import { FileSystemInterface } from "../FileSystemInterface";
-import { FileIdentifier, FileItem, NodeFSInterfaceConfig, PathIdentifier } from "../types";
+import { FileSystemInterface } from "../FileSystemInterface.js";
+import { FileIdentifier, FileItem, NodeFSInterfaceConfig, PathIdentifier } from "../types.js";
 
 export class NodeFSInterface extends FileSystemInterface {
     fs: any;

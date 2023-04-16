@@ -1,6 +1,16 @@
-const { GoogleDriveInterface } = require("../../dist/interfaces/GoogleDriveInterface.js");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { expect } from "chai";
+import sinon from "sinon";
+import { GoogleDriveInterface } from "../../dist/interfaces/GoogleDriveInterface.js";
 
-const testResponse = require("../GoogleDriveInterface-resources/files-response.json");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const testResponse = JSON.parse(
+    fs.readFileSync(
+        path.resolve(__dirname, "../GoogleDriveInterface-resources/files-response.json")
+    )
+);
 
 describe("GoogleDriveInterface", function () {
     beforeEach(function () {
@@ -32,9 +42,8 @@ describe("GoogleDriveInterface", function () {
     describe("getDirectoryContents", function () {
         it("calls getDirectoryContents with tree:false", function () {
             return this.interface.getDirectoryContents({ identifier: null }).then(() => {
-                expect(
-                    this.googleDriveClient.getDirectoryContents.calledWithExactly({ tree: false })
-                ).to.be.true;
+                expect(this.googleDriveClient.getDirectoryContents.calledWithExactly(false)).to.be
+                    .true;
             });
         });
 

@@ -1,4 +1,4 @@
-import { FileIdentifier, FileItem, PathIdentifier } from "./types";
+import { FileIdentifier, FileItem, PathIdentifier } from "./types.js";
 
 export class FileSystemInterface {
     constructor(config: { [key: string]: any }) {}

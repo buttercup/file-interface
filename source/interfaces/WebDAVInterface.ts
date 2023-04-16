@@ -1,6 +1,6 @@
 import joinPath from "join-path";
-import { FileSystemInterface } from "../FileSystemInterface";
-import { FileIdentifier, FileItem, PathIdentifier, WebDAVInterfaceConfig } from "../types";
+import { FileSystemInterface } from "../FileSystemInterface.js";
+import { FileIdentifier, FileItem, PathIdentifier, WebDAVInterfaceConfig } from "../types.js";
 
 export class WebDAVInterface extends FileSystemInterface {
     webdavClient: any;
