@@ -1,5 +1,11 @@
 # File Interface changelog
 
+## v3.0.0
+_2023-04-16_
+
+ * ESM
+ * Bundled types for Google Drive, Dropbox and WebDAV clients
+
 ## v2.0.0
 _2021-11-26_
 
