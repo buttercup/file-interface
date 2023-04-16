@@ -37,7 +37,7 @@ Install by running: `npm install @buttercup/file-interface --save`
 
 ### Environment support
 
-This library supports NodeJS version 10 and above.
+This library supports NodeJS version 16 and above. It is full ESM and therefore requires an environment which supports ECMAScript modules.
 
 ## Usage
 
