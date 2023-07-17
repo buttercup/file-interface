@@ -1,5 +1,10 @@
 # File Interface changelog
 
+## v3.0.1
+_2023-07-17_
+
+ * React-Native entry in `package.json`
+
 ## v3.0.0
 _2023-04-16_
 
