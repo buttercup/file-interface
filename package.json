@@ -1,6 +1,6 @@
 {
   "name": "@buttercup/file-interface",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Client request library interface and explorer",
   "exports": "./dist/index.js",
   "react-native": "./dist/index.js",
